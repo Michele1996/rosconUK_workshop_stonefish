@@ -1,0 +1,7 @@
+bluerov_pid:
+  ros__parameters:
+    # Starter gains. Validate/tune against the final survey scene.
+    x_kp: 0.45
+    y_kp: 0.45
+    z_kp: 0.65
+    yaw_kp: 1.20

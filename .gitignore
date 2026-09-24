@@ -1,0 +1,14 @@
+build/
+install/
+log/
+__pycache__/
+*.pyc
+*.pyo
+.vscode/
+.idea/
+.DS_Store
+reconstruction/*/database.db
+reconstruction/*/sparse/
+reconstruction/*/dense/
+*.db3
+*.mcap
