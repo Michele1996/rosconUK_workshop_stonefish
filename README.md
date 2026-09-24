@@ -2,7 +2,7 @@
 
 Hands-on material for the **ROSCon UK 2026** workshop.
 
-**Presenter:** Michele Grimaldi — Heriot-Watt University
+**Presenter:** Michele Grimaldi, Favour Adetunji — Heriot-Watt University
 
 This repository introduces marine robotics with ROS 2 and
 [Stonefish](https://stonefish.readthedocs.io/en/latest/) through a progressive
