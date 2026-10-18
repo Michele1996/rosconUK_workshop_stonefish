@@ -1,447 +1,419 @@
-# Underwater Robotics with ROS and Stonefish: Simulate, Explore!
+# ROSCon UK 2026 — Stonefish Marine Robotics Workshop
 
-Hands-on material for the **ROSCon UK 2026** workshop.
+**ROS 2 Humble · Stonefish 1.6 · BlueBoat Grand Prix · BlueROV2 survey and mapping**
 
-**Presenter:** Michele Grimaldi, Favour Adetunji — Heriot-Watt University
+This repository provides two independent marine robotics challenges. Each installation runs locally; no shared ROS network or common `ROS_DOMAIN_ID` is required. The BlueBoat Grand Prix includes a complete simulation circuit, a controller starter, a practice workflow and a locally scored three-attempt time trial. The BlueROV2 mapping exercise contains preliminary control, planning and reconstruction tools; its final survey scenario will be added in a later revision.
 
-This repository introduces marine robotics with ROS 2 and
-[Stonefish](https://stonefish.readthedocs.io/en/latest/) through a progressive
-set of practical exercises:
-
-**surface-vehicle control → underwater control → survey planning → image
-acquisition → 3D reconstruction**
-
-> **Workshop status**
+> **Public repository — please do not mirror or redistribute the complete workshop bundle.**
 >
-> The BlueBoat exercise and BlueROV2 control stack are included. The final
-> BlueROV2 survey environment and the associated known-good reconstruction
-> dataset will be added before the workshop.
+> The project is publicly available for use with the ROSCon UK 2026 workshop. Please link to the original repository instead of re-uploading or repackaging the full collection of scenarios, models, textures and event-specific materials. Independently developed controllers, policies and results may be shared subject to applicable rights and licences.
+>
+> **Licensing:** This is a request, not an additional restriction on third-party or open-source licences. The ROS package identifies its software licence as `Apache-2.0`, which permits redistribution under its terms. Stonefish, `stonefish_ros2`, third-party meshes and textures retain their respective licence conditions. Check the rights to bundled assets before republishing them.
 
----
+**Repository status:** BlueBoat race logic has been checked with offline tests; a final graphical/propulsion check must be performed on the target Stonefish installation. The second challenge is a **work in progress**, not yet a complete ready-to-run mapping scenario.
 
-## Workshop overview
+## Contents
 
-The workshop is designed as a roughly three-hour hands-on session.
+1. [Overview and objectives](#1-overview-and-objectives)
+2. [Prerequisites and installation](#2-prerequisites-and-installation)
+3. [BlueBoat circuit and scoring rules](#3-blueboat-circuit-and-scoring-rules)
+4. [Practice Mode and direct thruster control](#4-practice-mode-and-direct-thruster-control)
+5. [PID, vision and reinforcement learning](#5-pid-vision-and-reinforcement-learning)
+6. [Official attempts and result export](#6-official-attempts-and-result-export)
+7. [Track-map release](#7-track-map-release)
+8. [BlueROV2 survey and 3D mapping](#8-bluerov2-survey-and-3d-mapping)
+9. [Troubleshooting and verification](#9-troubleshooting-and-verification)
+10. [Package structure and sharing](#10-package-structure-and-sharing)
 
-Participants first explore the dynamics and sensors of marine robots in
-Stonefish. They then implement a simple controller for a BlueBoat, move to a
-provided low-level controller for a BlueROV2, design an underwater survey
-trajectory, record camera data, and reconstruct the surveyed scene using
-COLMAP or GLOMAP.
+## 1. Overview and objectives
 
-The emphasis is on the complete robotics pipeline rather than on any single
-algorithm:
+| Challenge | Platform | Objective | Availability |
+| --- | --- | --- | --- |
+| **BlueBoat Grand Prix** | BlueBoat, two differential thrusters | Navigate a buoy-defined course using PID, RL, computer vision or a hybrid controller; minimise penalty-adjusted completion time. | Implemented; verify in Stonefish |
+| **Underwater Survey and Mapping** | BlueROV2 | Plan an underwater survey, acquire overlapping observations and reconstruct a scene with COLMAP or GLOMAP. | Preliminary tools; final environment pending |
 
-```text
-ROS 2 + Stonefish
-       |
-       v
-marine robot simulation
-       |
-       +--> BlueBoat --> participant PID --> red goal
-       |
-       `--> BlueROV2 --> provided PID --> participant survey planner
-                                      |
-                                      v
-                                  RGB images
-                                      |
-                                      v
-                              COLMAP / GLOMAP
-                                      |
-                                      v
-                              3D reconstruction
+A local installation contains Stonefish, ROS 2 interfaces, control nodes and the BlueBoat race judge. Timed attempts are conducted independently and exported for comparison. A common network or central simulator is **not** required.
+
+## 2. Prerequisites and installation
+
+The target environment is **Ubuntu 22.04**, **ROS 2 Humble**, **Stonefish 1.6**, `stonefish_ros2`, Python 3 and a GPU supporting OpenGL 4.3. Install and verify Stonefish and `stonefish_ros2` before installing this package. The Grand Prix does not require COLA2.
+
+Upstream references: [ROS 2 Humble](https://docs.ros.org/en/humble/Installation.html), [Stonefish](https://stonefish.readthedocs.io/en/latest/) and [stonefish_ros2](https://github.com/patrykcieslak/stonefish_ros2).
+
+Optional requirements include an OpenCV build with the ArUco module (visual marker detection) and COLMAP/GLOMAP (3D reconstruction). The ROS package uses `geometry_msgs`, `nav_msgs`, `sensor_msgs`, `std_msgs`, `std_srvs` and `ament_index_python`.
+
+Install standard ROS build tools if needed:
+
+```bash
+sudo apt update
+sudo apt install -y python3-colcon-common-extensions python3-rosdep unzip
 ```
 
----
+From an existing ROS workspace with a working Stonefish installation:
 
-## Learning objectives
+```bash
+cd ~/ros2_ws
+source /opt/ros/humble/setup.bash
 
-By the end of the workshop, participants should be able to:
+# Adjust this archive location if necessary.
+mkdir -p /tmp/roscon_release
+unzip -oq ~/Downloads/rosconUK_Stonefish_Workshop_FORMAL_README_COMPLETE.zip \
+  -d /tmp/roscon_release
 
-- launch and inspect a marine robot simulation in Stonefish;
-- discover and inspect ROS 2 sensor and actuator interfaces;
-- understand why marine-vehicle dynamics differ from ideal kinematic robots;
-- implement and tune a simple goal-reaching controller for a surface vehicle;
-- understand multi-thruster allocation on an underwater robot;
-- design a survey trajectory with image overlap and reconstruction in mind;
-- record image data with ROS 2;
-- turn a simulated survey into a sparse 3D reconstruction.
+# Save an older installation outside the workspace source tree.
+if [ -d src/roscon_stonefish_workshop ]; then
+  mv src/roscon_stonefish_workshop \
+    "$HOME/roscon_stonefish_workshop_previous_$(date +%Y%m%d_%H%M%S)"
+fi
 
-No previous marine-robotics experience is required. Basic familiarity with
-ROS 2 topics, nodes, launch files, and Python is useful.
+cp -a /tmp/roscon_release/rosconUK_workshop_stonefish \
+  src/roscon_stonefish_workshop
 
----
-
-## Tested platform
-
-The workshop deliberately has a small simulator dependency chain:
-
-```text
-ROS 2 Humble
-   + Stonefish (patrykcieslak/stonefish)
-   + stonefish_ros2 (patrykcieslak/stonefish_ros2)
-   + this repository
+colcon build --symlink-install --packages-select roscon_stonefish_workshop
+source install/setup.bash
+ros2 pkg prefix roscon_stonefish_workshop
+ros2 pkg prefix stonefish_ros2
 ```
 
-There is **no `cola2_stonefish` dependency**.
+For a repository checkout, place the `roscon_stonefish_workshop` directory directly under `~/ros2_ws/src/` and run the same `colcon build` command. **Source ROS 2 and the workspace setup file in each new terminal.**
 
-The workshop targets:
+Offline checks, independent of a running simulator:
 
-- Ubuntu 22.04
-- ROS 2 Humble
-- Stonefish
-- `stonefish_ros2`
-- Python 3
+```bash
+cd ~/ros2_ws/src/roscon_stonefish_workshop
+python3 -m unittest discover -s tests -v
+```
 
-A dedicated GPU supporting OpenGL 4.3+ is strongly recommended.
+Successful offline tests do not prove correct propeller direction, camera visibility, GPU rendering or dynamic response. Verify those in Stonefish before running a time trial.
 
-The exact tested repository URLs/commits for the Stonefish ROS integration and
-workshop assets will be pinned before the public workshop release.
+## 3. BlueBoat circuit and scoring rules
 
-See [`INSTALL.md`](INSTALL.md) for installation instructions and
-[`PRE_WORK.md`](PRE_WORK.md) for the participant checklist.
+The **Chiocciola v4** circuit is a point-to-point course of approximately **225.8 m**, with a nominal **6.8 m corridor width**. It contains **254 static, non-colliding yellow buoys** (127 per boundary), **12 ordered checkpoints**, **24 paired ArUco direction signs**, a green START gate and a red FINISH gate.
 
----
+The route consists of a **20 m starting straight**, S-bends, an approximately **258° tightening spiral** (*chiocciola*), a **10 m straight**, a **90° elbow** (*curva a gomito*), and a **25 m finishing straight**. The course is **not** a closed lap.
 
-## Repository structure
+The ArUco IDs are **11–22** on one side and **31–42** on the other. Their yellow headers provide a visual indication of direction. Marker detection is optional: the official checkpoint checks use the local judge's simulated ground-truth position, not computer-vision detections.
+
+### Scoring
+
+An official result is valid only after a forward START crossing, all **12 checkpoints in order**, and a FINISH crossing. Skipped checkpoints and cuts that bypass gates cannot create a completed result.
+
+The adjusted time is:
+
+\[
+T_{\mathrm{adjusted}} = T_{\mathrm{elapsed}} + 8N_{\mathrm{offtrack}} + 2T_{\mathrm{outside}}.
+\]
+
+Here, `T_elapsed` is the START-to-FINISH duration in **simulation seconds**; `N_offtrack` counts separate departures from the permitted corridor; and `T_outside` is the accumulated time outside it, in simulation seconds. Each departure adds **8 s**, plus **2 s per second** spent outside. For example, a run of 150 s with two excursions totalling 5 s scores `150 + 2×8 + 2×5 = 176 s`.
+
+The official rules are:
+
+- **Practice is unlimited** and produces no official race result.
+- **Three official attempts maximum** per team identifier and course hash. An attempt is consumed when armed, including if it is cancelled, abandoned or interrupted by a restart.
+- Timing begins **only after the judge is ARMED** and the boat crosses START in the correct direction.
+- CP01 through CP12 must be crossed in sequence, followed by FINISH.
+- A run exceeding **1,200 simulation seconds** is a DNF; unfinished attempts do not receive a ranked time.
+- The best **FINISHED** adjusted time from the three available official attempts determines the result.
+- All compared runs should use an identical track, scene, judge version and physics configuration. Records generated locally are reviewable but **not tamper-proof**.
+
+## 4. Practice Mode and direct thruster control
+
+**Practice Mode is unrestricted training.** The boat can be driven manually or autonomously, control algorithms can be tested, and the full circuit can be explored without affecting official results. The local race judge starts in `practice` state and stays there until an official attempt is explicitly armed.
+
+During practice, it is possible to command the two thrusters directly, tune PID or waypoint-following controllers, compare cornering speeds, detect ArUco markers, test RL policies, cross START and all 12 checkpoints repeatedly, or restart the simulator to restore the initial pose.
+
+**No practice traversal counts toward the leaderboard.** Even a complete START → CP01 → … → CP12 → FINISH traversal is not a scored attempt unless `race_start` was run first.
+
+### Terminal 1 — Launch the simulation with direct thruster control
+
+To use the direct thruster demo, **disable the thruster adapter**:
+
+```bash
+source /opt/ros/humble/setup.bash
+source ~/ros2_ws/install/setup.bash
+
+ros2 launch roscon_stonefish_workshop \
+  blueboat_workshop.launch.py \
+  team:=Team_01 \
+  thruster_adapter:=false
+```
+
+This launches the BlueBoat, complete track and local race judge. Disabling the bridge avoids conflicting publishers on the physical thruster command topic.
+
+### Terminal 2 — Run the thruster demo
+
+```bash
+source /opt/ros/humble/setup.bash
+source ~/ros2_ws/install/setup.bash
+
+ros2 run roscon_stonefish_workshop blueboat_thruster_demo --demo
+```
+
+The demo runs a gentle straight-thrust sequence, stops, applies differential thrust and stops again. It is an actuator familiarisation example, **not** an automatic course controller.
+
+To issue one command instead:
+
+```bash
+ros2 run roscon_stonefish_workshop \
+  blueboat_thruster_demo \
+  --right -0.15 \
+  --left -0.15 \
+  --duration 3
+```
+
+This publishes normalized motor commands of `-0.15` for 3 s and then sends stop commands. The script limits setpoints to **[-0.3, 0.3]** and duration to **15 s**. It publishes `std_msgs/msg/Float64MultiArray` at:
+
+```text
+/blueboat/controller/thruster_setpoints_sim
+```
+
+Array order:
+
+```text
+[right_thruster, left_thruster]
+```
+
+The propellers are pitched by 180°. **Confirm visually which command sign produces forward motion** before implementing an autonomous controller; do not infer the direction from the command sign alone. Stop this demo before using the velocity-command interface.
+
+### Terminal 3 — Monitor local race status
+
+```bash
+source /opt/ros/humble/setup.bash
+source ~/ros2_ws/install/setup.bash
+
+ros2 topic echo /blueboat/race/status
+```
+
+The judge publishes JSON containing state, checkpoint progress and remaining official attempts. During practice, it should report `practice`. Check interfaces with:
+
+```bash
+ros2 topic list | grep blueboat
+ros2 service list | grep /blueboat/race
+```
+
+### Switch to PID or velocity commands
+
+Stop the direct demo and the simulator. Relaunch **with the adapter enabled** (the default):
+
+```bash
+source /opt/ros/humble/setup.bash
+source ~/ros2_ws/install/setup.bash
+
+ros2 launch roscon_stonefish_workshop \
+  blueboat_workshop.launch.py \
+  team:=Team_01
+```
+
+In another terminal, run the supplied PID starter:
+
+```bash
+source /opt/ros/humble/setup.bash
+source ~/ros2_ws/install/setup.bash
+ros2 run roscon_stonefish_workshop blueboat_pid
+```
+
+Alternatively, with the PID process stopped, test the high-level command topic:
+
+```bash
+ros2 topic pub -r 10 /blueboat/cmd_vel geometry_msgs/msg/Twist \
+  "{linear: {x: 0.15}, angular: {z: 0.0}}"
+# Ctrl+C stops publication; the adapter applies a command timeout.
+```
+
+With the adapter enabled, `geometry_msgs/msg/Twist` commands on `/blueboat/cmd_vel` are converted to right/left thruster setpoints. Avoid running multiple command publishers simultaneously.
+
+## 5. PID, vision and reinforcement learning
+
+### Implementing and tuning PID
+
+The starter is `roscon_stonefish_workshop/blueboat_pid.py`. It subscribes to `/blueboat/odom` and publishes commands on `/blueboat/cmd_vel`. It includes heading-control logic, waypoint lookahead and sections marked `TODO` for implementing forward motion and tuning the controller.
+
+**The supplied starter intentionally sets forward speed to zero**; running it unchanged will not complete the course. Implement surge control, corner-dependent speed selection and PID tuning before using an official attempt. The example reads the local course geometry from `config/blueboat_race.json`.
+
+A separate ROS 2 control node may replace the starter, provided it publishes the same velocity command interface and does not conflict with other controllers. Available observations include odometry, IMU, GPS and the simulated forward camera. The referee's `/blueboat/race/ground_truth_odom` is the scoring source and should not be treated as an additional contest-navigation sensor unless the event rules expressly permit it.
+
+### Optional ArUco detection
+
+```bash
+ros2 run roscon_stonefish_workshop blueboat_aruco_detector
+ros2 topic echo /blueboat/aruco/ids
+```
+
+The detector relies on OpenCV's ArUco module. Visibility and decoding depend on camera viewpoint, image resolution and the rendering environment. **ArUco detection is not needed for official checkpoint validation.**
+
+### Optional reinforcement learning
+
+A controller can learn from **local observations without an explicit global map**: image detections of buoys/markers, heading, yaw rate, velocity and previous actions. Policies may command `/blueboat/cmd_vel` with the adapter enabled or send right/left setpoints directly with the adapter disabled.
+
+A training reward can encourage along-track progress and successful ordered completion while penalising elapsed time, leaving the corridor and unstable commands. This reward is for policy optimisation only; **official scoring always uses the formula in Section 3**.
+
+Repeated simulation episodes and a reset mechanism are required for training. Use Practice Mode for these episodes; reserve official attempts for completed policies. A ready-to-train Gymnasium environment or pretrained RL model is **not included**. The configuration and scene necessarily contain track geometry, so accessing those files is map-based planning rather than a strictly map-blind approach.
+
+## 6. Official attempts and result export
+
+Every official run is started **locally**. No central ROS server or shared IP is needed. Only activate scoring once the controller is ready.
+
+Before starting, restart the simulator so the BlueBoat is near its initial position, enable the thruster adapter if using Twist-based control and confirm that odometry is publishing.
+
+### Terminal 1 — Start the simulator
+
+```bash
+source /opt/ros/humble/setup.bash
+source ~/ros2_ws/install/setup.bash
+
+ros2 launch roscon_stonefish_workshop \
+  blueboat_workshop.launch.py \
+  team:=Team_01
+```
+
+### Terminal 2 — Run the controller
+
+```bash
+source /opt/ros/humble/setup.bash
+source ~/ros2_ws/install/setup.bash
+ros2 run roscon_stonefish_workshop blueboat_pid
+```
+
+A custom PID, RL or hybrid controller may be used instead.
+
+### Terminal 3 — Arm one official attempt
+
+```bash
+source /opt/ros/humble/setup.bash
+source ~/ros2_ws/install/setup.bash
+ros2 run roscon_stonefish_workshop race_start
+```
+
+Equivalent ROS service call:
+
+```bash
+ros2 service call /blueboat/race/arm \
+  std_srvs/srv/SetBool "{data: true}"
+```
+
+The judge must report **ARMED** before the START crossing. An attempt is reserved **immediately on arming** and counts toward the three-attempt limit even if subsequently abandoned.
+
+The event sequence is **ARMED → START → CP01 … CP12 → FINISH**. The elapsed time and penalties are measured in simulation time. Monitor progress with:
+
+```bash
+ros2 topic echo /blueboat/race/status
+```
+
+For another official attempt, stop the controller and simulator, restart the scene from its initial pose and arm again. **Do not delete the results directory between runs.** To cancel an active attempt (which still consumes its slot):
+
+```bash
+ros2 run roscon_stonefish_workshop race_start --disarm
+```
+
+### Stored race records
+
+Official records are saved locally under a team-and-course-specific directory:
+
+```text
+~/.ros/roscon_blueboat_grand_prix/Team_01/<course-hash>/attempt_01/report.json
+~/.ros/roscon_blueboat_grand_prix/Team_01/<course-hash>/attempt_01/trajectory.csv
+```
+
+Reports include the course hash, attempt ID and number, outcome, elapsed time, off-track penalties, adjusted time for completed runs, checkpoint timing and the XY trajectory. DNF and abandoned attempts are not ranked, but still use an official attempt slot.
+
+Export a submission ZIP after completing the attempts:
+
+```bash
+ros2 run roscon_stonefish_workshop race_export --team Team_01
+```
+
+Default output:
+
+```text
+~/roscon_submissions/Team_01_<course-hash>_submission.zip
+```
+
+The exporter runs offline and includes the available attempt reports and trajectories. Submit the ZIP through the event's designated collection channel.
+
+To combine multiple submission ZIPs already collected into a directory:
+
+```bash
+cd ~/ros2_ws/src/roscon_stonefish_workshop
+python3 scripts/show_blueboat_leaderboard.py ~/roscon_submissions
+```
+
+Results are local, self-reported evidence. Course hashes and trajectories aid review but do **not** prevent deliberate modification on an independently controlled computer. Additional verification may be required for prizes.
+
+## 7. Track-map release
+
+The full-resolution overhead map and waypoint CSV are distributed **separately** from this repository's main package. The announced release point is **30 minutes after the challenge begins**. Once published in the event repository, the map can be used for waypoint-based PID, planning or RL approaches.
+
+There is **no automatic unlock service**. The image/CSV release is manual. Because the simulator and local judge require the course geometry in `config/blueboat_race.json` and the scene files, the first 30 minutes are a **fair-play map-blind phase**, not a cryptographically enforced restriction. The README deliberately does not claim otherwise.
+
+## 8. BlueROV2 survey and 3D mapping
+
+The second challenge is independent of the BlueBoat race. Its objective is to plan a safe, efficient underwater survey and use recorded observations to reconstruct a scene with COLMAP or GLOMAP. Planning considerations include overlap, coverage, stand-off distance, viewing geometry and survey duration.
+
+Included preliminary tools:
+
+- `roscon_stonefish_workshop/bluerov_pid.py` — controller starter.
+- `roscon_stonefish_workshop/survey_planner.py` — survey-planning logic to extend.
+- `roscon_stonefish_workshop/control_utils.py` and `thruster_adapter.py` — control utilities.
+- `reconstruction/scripts/extract_images_from_bag.py` — image extraction from ROS bag data.
+- `reconstruction/scripts/run_colmap.sh` and `run_glomap.sh` — reconstruction script entrypoints; inspect the arguments before use.
+
+The currently available launch file is a **placeholder**. The final survey world, camera topics, validated dataset and evaluation procedure have not yet been released:
+
+```bash
+ros2 launch roscon_stonefish_workshop bluerov2_workshop.launch.py
+# Currently prints a status message; it does not launch a final mapping world.
+```
+
+Once the survey environment becomes available, inspect the actual topics and record the appropriate camera and odometry data:
+
+```bash
+ros2 topic list
+ros2 bag record -o survey_bag <camera_topic> <odometry_topic>
+```
+
+Replace the bracketed topic placeholders with the discovered topic names. Do not assume a particular camera calibration, data stream or reconstruction accuracy until the final scenario is provided.
+
+## 9. Troubleshooting and verification
+
+| Symptom | Check |
+| --- | --- |
+| Stonefish aborts with `Material file not found` | Ensure the corrected `opti_blueboat` OBJ assets are installed; older propeller meshes referenced missing `.mtl` files. |
+| Forward/reverse motion does not match commands | Test small direct setpoints and inspect the 180° propeller pitch and inversion settings. |
+| Direct thruster demo has no effect | Launch with `thruster_adapter:=false`; the adapter otherwise competes for the setpoint topic. |
+| `/blueboat/cmd_vel` has no effect | Launch with the adapter enabled (the default), publish one Twist controller at a time and check for topic activity. |
+| `race_start` cannot arm | Confirm race status, odometry, initial spawn proximity (within 1.5 m) and remaining attempt slots. |
+| START crossing is not scored | Check for an **ARMED** state; crossing START during practice is intentionally ignored. |
+| A run fails to finish | Verify all 12 checkpoints were crossed in order and within their gate widths, before FINISH. |
+| `race_export` finds no results | Check the team identifier and confirm an official attempt was armed previously. |
+| ArUco signs appear incorrectly cropped | Use the centered-texture original-size box-panel textures included with this release. |
+| A simulator build succeeds but runtime fails | Inspect simulator output and run Stonefish locally; the offline tests cannot validate GPU rendering or physics. |
+
+The simulation can run at different wall-clock speeds depending on the machine; the race measures simulation time. Comparable results still require the same physics, course and judge configuration.
+
+## 10. Package structure and sharing
 
 ```text
 roscon_stonefish_workshop/
-├── README.md
-├── PARTICIPANT_INSTRUCTIONS.md
-├── INSTALL.md
-├── PRE_WORK.md
-├── TROUBLESHOOTING.md
-├── WORKSHOP_SCHEDULE.md
-├── EQUIPMENT.md
-│
-├── package.xml
-├── setup.py
-├── setup.cfg
-│
-├── launch/
-│   ├── blueboat_workshop.launch.py
-│   ├── bluerov_controller.launch.py
-│   └── bluerov2_workshop.launch.py
-│
+├── README.md                        # complete documentation (single README)
+├── package.xml / setup.py / setup.cfg
+├── launch/                          # race launch; mapping placeholder
+├── config/blueboat_race.json        # course and judge geometry
 ├── data/
-│   ├── scenarios/
-│   │   ├── blueboat_goal.scn
-│   │   └── BLUEROV_ENVIRONMENT_PENDING.md
-│   ├── robots/
-│   │   ├── blueboat.scn
-│   │   └── bluerov2_pending_assets.scn
-│   └── meshes/
-│       └── propeller.obj
-│
+│   ├── scenarios/blueboat_race.scn  # full marked course
+│   ├── robots/blueboat.scn          # BlueBoat model, sensors and thrusters
+│   ├── opti_blueboat/               # model/propeller assets
+│   └── textures/                    # ArUco and arrow images
 ├── roscon_stonefish_workshop/
-│   ├── blueboat_pid.py
-│   ├── bluerov_pid.py
-│   ├── survey_planner.py
-│   ├── thruster_adapter.py
-│   └── control_utils.py
-│
-├── exercises/
-│   ├── 01_explore_the_blueboat.md
-│   ├── 02_understand_the_bluerov2.md
-│   ├── 03_survey_challenge.md
-│   └── 04_3d_reconstruction.md
-│
-├── reconstruction/
-│   ├── scripts/
-│   │   ├── extract_images_from_bag.py
-│   │   ├── run_colmap.sh
-│   │   └── run_glomap.sh
-│   └── reference_dataset/
-│
-└── scripts/
-    ├── blueboat_pid_solution.py
-    ├── survey_planner_solution.py
-    └── bluerov2_logitechF310teleop_original.py
+│   ├── blueboat_thruster_intro.py   # direct thruster-control example
+│   ├── blueboat_pid.py              # controller starter
+│   ├── blueboat_race_monitor.py     # local timing and scoring
+│   ├── race_engine.py / race_geometry.py / race_records.py
+│   ├── race_start.py / race_export.py
+│   ├── bluerov_pid.py / survey_planner.py
+│   └── blueboat_aruco_detector.py
+├── scripts/show_blueboat_leaderboard.py
+├── reconstruction/                 # image extraction/reconstruction scripts
+└── tests/                          # offline validation
 ```
 
----
-
-## Installation
-
-Start with the full instructions in [`INSTALL.md`](INSTALL.md).
-
-Once the dependencies and workshop workspace are available:
-
-```bash
-cd ~/roscon_ws
-source /opt/ros/humble/setup.bash
-
-# Source the workspace containing Stonefish ROS 2 / COLA2 packages.
-# source <stonefish_ros_workspace>/install/setup.bash
-
-colcon build --symlink-install
-source install/setup.bash
-```
-
-Verify that the required simulator packages are visible:
-
-```bash
-ros2 pkg prefix stonefish_ros2
-```
-
----
-
-## Exercise 1 — BlueBoat PID challenge
-
-The first environment is intentionally simple: a **BlueBoat and a red cube**.
-The cube marks the navigation goal.
-
-Launch the simulation:
-
-```bash
-ros2 launch roscon_stonefish_workshop blueboat_workshop.launch.py
-```
-
-Participants work on:
-
-```text
-roscon_stonefish_workshop/blueboat_pid.py
-```
-
-Find the exercise sections with:
-
-```bash
-grep -R "TODO(participant)" roscon_stonefish_workshop/
-```
-
-The task is to complete and tune the goal-reaching controller while observing
-the effect of the simulated first-order thruster dynamics.
-
-An instructor reference implementation is available in:
-
-```text
-scripts/blueboat_pid_solution.py
-```
-
----
-
-## Exercise 2 — BlueROV2 control
-
-For the underwater exercise, the low-level controller is provided.
-
-```bash
-ros2 launch roscon_stonefish_workshop bluerov_controller.launch.py
-```
-
-The control architecture is:
-
-```text
-PoseStamped
-     |
-     v
-x/y/depth/yaw PID
-     |
-     v
-geometry_msgs/Twist
-     |
-     v
-8 x 4 thruster allocation
-     |
-     v
-std_msgs/Float64MultiArray
-     |
-     v
-/bluerov/controller/thruster_setpoints_sim
-```
-
-The allocation follows the existing BlueROV2 joystick interface used by the
-workshop setup. Commands represent:
-
-```text
-[forward, side, rotation, depth]
-```
-
-and are mapped to the eight simulated thrusters and normalized to the range
-expected by the simulator.
-
-Participants therefore do **not** spend the workshop implementing an
-eight-thruster low-level controller. Instead, they can focus on the survey.
-
----
-
-## Exercise 3 — Survey-planning challenge
-
-Participants edit:
-
-```text
-roscon_stonefish_workshop/survey_planner.py
-```
-
-The objective is to design a trajectory that produces a useful image sequence
-for 3D reconstruction.
-
-Things to consider include:
-
-- image overlap;
-- camera viewpoint;
-- stand-off distance;
-- line spacing;
-- unnecessary rotations;
-- mission duration;
-- coverage of the target.
-
-A lawn-mower trajectory provides a useful baseline, but participants are free
-to improve it.
-
-The final environment bounds and starting pose will be inserted once the
-workshop survey scene is finalized.
-
----
-
-## Exercise 4 — From ROS 2 to 3D
-
-Participants record the camera stream during their survey.
-
-A typical workflow is:
-
-```bash
-ros2 bag record <RGB_CAMERA_TOPIC>
-```
-
-Extract the images:
-
-```bash
-python3 reconstruction/scripts/extract_images_from_bag.py \
-    <BAG_DIRECTORY> \
-    <RGB_CAMERA_TOPIC> \
-    my_survey/images
-```
-
-Run COLMAP:
-
-```bash
-./reconstruction/scripts/run_colmap.sh \
-    my_survey/images \
-    my_survey/colmap
-```
-
-or GLOMAP:
-
-```bash
-./reconstruction/scripts/run_glomap.sh \
-    my_survey/images \
-    my_survey/glomap
-```
-
-Participants then inspect:
-
-- number of registered images;
-- estimated camera trajectory;
-- reconstruction coverage;
-- disconnected components;
-- missing regions;
-- whether neighbouring survey lines are geometrically connected.
-
-A known-good reference sequence will also be supplied so that everyone can
-complete the reconstruction exercise even if their own survey does not
-reconstruct successfully.
-
----
-
-## Participant tasks vs provided components
-
-| Component | Participant task? |
-|---|---|
-| Stonefish simulation | Provided |
-| BlueBoat environment | Provided |
-| BlueBoat PID | **Implement/tune** |
-| BlueROV2 low-level PID | Provided |
-| BlueROV2 thruster allocation | Provided |
-| Survey trajectory | **Implement/design** |
-| Image recording | **Perform** |
-| ROS bag image extraction | Provided |
-| COLMAP/GLOMAP scripts | Provided |
-| Survey-quality analysis | **Perform** |
-
-This division is deliberate: the workshop exposes the complete robotics
-pipeline without requiring participants to implement every subsystem from
-scratch.
-
----
-
-## Reconstruction tools
-
-The repository supports two Structure-from-Motion back ends:
-
-### COLMAP
-
-J. L. Schönberger and J.-M. Frahm,
-*Structure-from-Motion Revisited*, CVPR 2016.
-
-### GLOMAP
-
-L. Pan, D. Barath, M. Pollefeys, and J. L. Schönberger,
-*Global Structure-from-Motion Revisited*, ECCV 2024.
-
-Sparse reconstruction is the default workshop target. Dense reconstruction is
-optional if time and hardware permit.
-
----
-
-## Stonefish
-
-Stonefish is used as the marine simulation environment for the workshop.
-
-Documentation:
-
-https://stonefish.readthedocs.io/en/latest/
-
-Related publication:
-
-M. Grimaldi, P. Cieslak, E. Ochoa, V. Bharti, H. Rajani, I. Carlucho,
-M. Koskinopoulou, Y. R. Petillot, and N. Gracias,
-**“Stonefish: Supporting Machine Learning Research in Marine Robotics,”**
-arXiv:2502.11887, 2025.
-
----
-
-## Troubleshooting
-
-See [`TROUBLESHOOTING.md`](TROUBLESHOOTING.md).
-
-Before the workshop, the most important checks are:
-
-```bash
-ros2 pkg prefix stonefish_ros2
-ros2 launch roscon_stonefish_workshop blueboat_workshop.launch.py
-```
-
-If these work, you are ready for the required pre-work.
-
-COLMAP/GLOMAP installation is not required for the initial simulator check.
-
----
-
-## Workshop preparation
-
-Participants should read:
-
-1. [`PARTICIPANT_INSTRUCTIONS.md`](PARTICIPANT_INSTRUCTIONS.md)
-2. [`INSTALL.md`](INSTALL.md)
-3. [`PRE_WORK.md`](PRE_WORK.md)
-
-The final BlueROV2 environment and reference reconstruction dataset will be
-added before the workshop.
-
----
-
-## License
-
-Workshop code is distributed under the license specified in `package.xml`.
-
-Third-party software, models, meshes, textures, and datasets remain subject to
-their respective licenses.
-
----
-
-## Acknowledgements
-
-This workshop builds on Stonefish, ROS 2, COLA2, COLMAP, and GLOMAP and on
-research in marine robotic simulation, navigation, perception, and
-reconstruction.
+The full workshop package is publicly accessible, but please **link to the source repository instead of mirroring the bundle**. This request does not supersede the package's Apache-2.0 software licence or any third-party licensing terms. The separate overhead map/waypoints bundle is intended for the announced 30-minute release.
