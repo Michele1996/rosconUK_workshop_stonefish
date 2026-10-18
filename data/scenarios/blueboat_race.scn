@@ -1,0 +1,2819 @@
+<?xml version="1.0"?>
+<scenario>
+  <!-- GENERATED from config/blueboat_race.json. Do not hand edit. -->
+  <environment>
+    <ned latitude="41.7777" longitude="3.0333"/>
+    <ocean/>
+    <atmosphere><sun azimuth="20.0" elevation="50.0"/></atmosphere>
+  </environment>
+  <materials>
+    <material name="Neutral" density="1000.0" restitution="0.5"/>
+    <material name="Rock" density="3000.0" restitution="0.8"/>
+    <material name="Fiberglass" density="1500.0" restitution="0.3"/>
+    <material name="Aluminium" density="2710.0" restitution="0.7"/>
+    <material name="Polyamid" density="1500.0" restitution="0.1"/>
+    <material name="MarkerMaterial" density="1000.0" restitution="0.1"/>
+    <friction_table>
+      <friction material1="Neutral" material2="Neutral" static="0.5" dynamic="0.2"/>
+      <friction material1="Polyamid" material2="Polyamid" static="0.1" dynamic="0.05"/>
+    </friction_table>
+  </materials>
+  <looks>
+    <look name="RaceYellow" rgb="1.0 0.87 0.02" roughness="0.30"/>
+    <look name="RaceGreen" rgb="0.02 0.9 0.12" roughness="0.35"/>
+    <look name="RaceRed" rgb="0.95 0.02 0.08" roughness="0.35"/>
+    <look name="White" rgb="0.96 0.96 0.96" roughness="0.5"/>
+    <look name="Sign_CP01" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp01.png"/>
+    <look name="Sign_CP01_Left" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp01_left.png"/>
+    <look name="Arrow_CP01" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/arrow_cp01.png"/>
+    <look name="Sign_CP02" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp02.png"/>
+    <look name="Sign_CP02_Left" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp02_left.png"/>
+    <look name="Arrow_CP02" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/arrow_cp02.png"/>
+    <look name="Sign_CP03" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp03.png"/>
+    <look name="Sign_CP03_Left" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp03_left.png"/>
+    <look name="Arrow_CP03" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/arrow_cp03.png"/>
+    <look name="Sign_CP04" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp04.png"/>
+    <look name="Sign_CP04_Left" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp04_left.png"/>
+    <look name="Arrow_CP04" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/arrow_cp04.png"/>
+    <look name="Sign_CP05" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp05.png"/>
+    <look name="Sign_CP05_Left" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp05_left.png"/>
+    <look name="Arrow_CP05" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/arrow_cp05.png"/>
+    <look name="Sign_CP06" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp06.png"/>
+    <look name="Sign_CP06_Left" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp06_left.png"/>
+    <look name="Arrow_CP06" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/arrow_cp06.png"/>
+    <look name="Sign_CP07" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp07.png"/>
+    <look name="Sign_CP07_Left" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp07_left.png"/>
+    <look name="Arrow_CP07" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/arrow_cp07.png"/>
+    <look name="Sign_CP08" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp08.png"/>
+    <look name="Sign_CP08_Left" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp08_left.png"/>
+    <look name="Arrow_CP08" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/arrow_cp08.png"/>
+    <look name="Sign_CP09" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp09.png"/>
+    <look name="Sign_CP09_Left" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp09_left.png"/>
+    <look name="Arrow_CP09" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/arrow_cp09.png"/>
+    <look name="Sign_CP10" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp10.png"/>
+    <look name="Sign_CP10_Left" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp10_left.png"/>
+    <look name="Arrow_CP10" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/arrow_cp10.png"/>
+    <look name="Sign_CP11" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp11.png"/>
+    <look name="Sign_CP11_Left" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp11_left.png"/>
+    <look name="Arrow_CP11" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/arrow_cp11.png"/>
+    <look name="Sign_CP12" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp12.png"/>
+    <look name="Sign_CP12_Left" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/sign_cp12_left.png"/>
+    <look name="Arrow_CP12" gray="1.0" roughness="0.7" texture="$(find roscon_stonefish_workshop)/data/textures/arrow_cp12.png"/>
+  </looks>
+  <include file="$(find roscon_stonefish_workshop)/data/robots/blueboat.scn"/>
+  <!-- Buoys at fixed positions. Animated/manual = fixed; collisions=false = intangible. -->
+  <animated name="Buoy_L_000" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="-4.000 3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_000" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="-4.000 -3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_001" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="-2.200 3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_001" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="-2.200 -3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_002" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="-0.400 3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_002" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="-0.400 -3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_003" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="1.400 3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_003" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="1.400 -3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_004" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="3.200 3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_004" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="3.200 -3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_005" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="5.000 3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_005" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="5.000 -3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_006" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="6.800 3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_006" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="6.800 -3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_007" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="8.600 3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_007" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="8.600 -3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_008" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="10.400 3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_008" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="10.400 -3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_009" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="12.200 3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_009" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="12.200 -3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_010" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="14.000 3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_010" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="14.000 -3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_011" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="15.800 3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_011" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="15.800 -3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_012" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="17.600 3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_012" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="17.600 -3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_013" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="19.400 3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_013" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="19.400 -3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_014" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="21.200 3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_014" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="21.200 -3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_015" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="22.624 3.439 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_015" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="23.371 -3.320 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_016" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="23.443 3.636 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_016" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="26.036 -2.650 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_017" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="24.290 4.094 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_017" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="28.332 -1.374 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_018" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="25.243 4.923 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_018" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="30.093 0.156 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_019" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="26.326 6.107 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_019" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="31.441 1.627 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_020" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="27.622 7.549 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_020" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="32.550 2.863 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_021" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="29.296 9.093 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_021" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="33.517 3.761 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_022" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="31.498 10.450 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_022" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="34.373 4.287 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_023" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="34.123 11.249 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_023" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="35.181 4.532 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_024" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="36.446 11.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_024" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="36.446 4.600 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_025" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="38.246 11.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_025" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="38.246 4.600 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_026" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="40.046 11.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_026" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="40.046 4.600 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_027" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="41.846 11.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_027" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="41.846 4.600 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_028" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="43.646 11.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_028" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="43.646 4.600 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_029" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="46.334 11.079 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_029" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="44.522 4.525 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_030" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="48.744 10.053 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_030" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="45.408 4.128 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_031" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="50.747 8.631 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_031" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="46.331 3.461 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_032" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="52.266 7.223 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_032" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="47.451 2.422 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_033" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="53.629 5.765 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_033" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="48.545 1.249 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_034" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="54.852 4.359 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_034" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="49.685 -0.061 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_035" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="56.016 2.998 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_035" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="50.860 -1.435 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_036" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="57.153 1.705 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_036" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="52.101 -2.846 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_037" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="58.252 0.544 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_037" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="53.478 -4.298 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_038" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="59.382 -0.511 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_038" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="54.982 -5.695 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_039" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="60.532 -1.398 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_039" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="56.683 -7.004 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_040" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="61.584 -2.014 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_040" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="58.742 -8.191 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_041" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="62.730 -2.439 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_041" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="60.969 -9.007 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_042" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="63.709 -2.592 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_042" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="63.544 -9.390 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_043" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="65.426 -2.600 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_043" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="65.426 -9.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_044" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="67.226 -2.600 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_044" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="67.226 -9.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_045" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="69.026 -2.600 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_045" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="69.026 -9.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_046" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="70.826 -2.600 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_046" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="70.826 -9.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_047" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="72.626 -2.600 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_047" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="72.626 -9.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_048" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="74.426 -2.600 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_048" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="74.426 -9.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_049" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="76.226 -2.600 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_049" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="76.226 -9.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_050" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="78.026 -2.600 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_050" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="78.026 -9.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_051" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="79.826 -2.600 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_051" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="79.826 -9.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_052" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="81.626 -2.600 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_052" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="81.626 -9.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_053" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="83.618 -2.649 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_053" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="83.232 -9.438 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_054" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="85.666 -2.849 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_054" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="84.766 -9.589 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_055" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="87.692 -3.205 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_055" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="86.285 -9.858 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_056" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="89.685 -3.715 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_056" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="87.777 -10.242 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_057" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="91.673 -4.395 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_057" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="89.196 -10.727 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_058" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="93.561 -5.211 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_058" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="90.611 -11.338 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_059" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="95.380 -6.174 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_059" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="91.973 -12.059 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_060" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="97.116 -7.277 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_060" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="93.274 -12.887 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_061" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="98.793 -8.543 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_061" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="94.469 -13.791 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_062" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="100.329 -9.912 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_062" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="95.619 -14.817 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_063" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="101.777 -11.434 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_063" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="96.652 -15.903 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_064" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="103.068 -13.036 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_064" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="97.618 -17.103 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_065" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="104.244 -14.776 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_065" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="98.456 -18.345 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_066" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="105.270 -16.610 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_066" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="99.188 -19.652 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_067" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="106.118 -18.485 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_067" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="99.823 -21.056 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_068" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="106.818 -20.466 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_068" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="100.319 -22.470 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_069" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="107.342 -22.501 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_069" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="100.692 -23.920 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_070" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="107.686 -24.574 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_070" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="100.936 -25.398 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_071" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="107.844 -26.669 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_071" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="101.048 -26.891 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_072" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="107.814 -28.770 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_072" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="101.025 -28.389 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_073" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="107.595 -30.860 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_073" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="100.866 -29.877 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_074" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="107.175 -32.963 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_074" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="100.581 -31.303 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_075" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="106.574 -34.977 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_075" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="100.153 -32.738 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_076" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="105.769 -36.965 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_076" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="99.609 -34.086 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_077" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="104.799 -38.829 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_077" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="98.919 -35.414 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_078" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="103.630 -40.628 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_078" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="98.128 -36.634 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_079" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="102.320 -42.272 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_079" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="97.194 -37.803 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_080" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="100.823 -43.809 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_080" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="96.178 -38.843 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_081" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="99.180 -45.188 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_081" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="95.065 -39.775 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_082" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="97.405 -46.394 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_082" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="93.862 -40.590 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_083" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="95.515 -47.411 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_083" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="92.582 -41.276 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_084" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="93.489 -48.239 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_084" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="91.277 -41.809 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_085" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="91.427 -48.835 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_085" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="89.882 -42.213 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_086" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="89.270 -49.213 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_086" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="88.495 -42.457 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_087" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="87.128 -49.349 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_087" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="87.047 -42.549 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_088" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="84.940 -49.244 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_088" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="85.641 -42.481 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_089" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="82.778 -48.892 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_089" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="84.252 -42.253 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_090" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="80.671 -48.292 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_090" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="82.899 -41.867 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_091" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="78.648 -47.449 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_091" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="81.601 -41.324 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_092" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="76.704 -46.347 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_092" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="80.416 -40.650 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_093" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="74.910 -45.014 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_093" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="79.322 -39.839 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_094" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="73.327 -43.497 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_094" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="78.307 -38.867 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_095" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="71.896 -41.722 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_095" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="77.480 -37.842 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_096" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="70.733 -39.811 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_096" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="76.770 -36.681 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_097" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="69.834 -37.762 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_097" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="76.224 -35.436 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_098" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="69.212 -35.566 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_098" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="75.867 -34.170 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_099" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="68.900 -33.526 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_099" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="75.643 -32.651 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_100" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="68.668 -31.741 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_100" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="75.412 -30.866 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_101" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="68.437 -29.956 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_101" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="75.180 -29.081 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_102" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="68.205 -28.171 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_102" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="74.949 -27.296 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_103" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="67.973 -26.386 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_103" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="74.717 -25.511 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_104" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="67.742 -24.601 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_104" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="74.485 -23.726 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_105" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="67.494 -23.408 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_105" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="73.992 -21.403 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_106" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="67.089 -22.496 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_106" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="72.939 -19.030 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_107" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="66.455 -21.614 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_107" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="71.457 -17.008 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_108" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="65.649 -20.886 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_108" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="69.584 -15.340 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_109" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="64.708 -20.346 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_109" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="67.404 -14.103 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_110" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="63.673 -20.016 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_110" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="65.012 -13.349 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_111" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="62.592 -19.913 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_111" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="62.516 -13.114 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_112" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="61.201 -20.058 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_112" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="60.326 -13.314 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_113" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="59.416 -20.289 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_113" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="58.541 -13.546 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_114" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="57.631 -20.521 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_114" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="56.756 -13.778 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_115" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="55.846 -20.753 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_115" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="54.971 -14.009 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_116" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="54.061 -20.984 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_116" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="53.186 -14.241 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_117" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="52.276 -21.216 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_117" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="51.401 -14.473 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_118" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="50.491 -21.448 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_118" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="49.616 -14.704 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_119" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="48.706 -21.679 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_119" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="47.831 -14.936 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_120" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="46.921 -21.911 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_120" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="46.046 -15.167 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_121" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="45.136 -22.143 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_121" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="44.261 -15.399 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_122" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="43.351 -22.374 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_122" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="42.476 -15.631 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_123" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="41.566 -22.606 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_123" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="40.691 -15.862 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_124" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="39.781 -22.837 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_124" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="38.906 -16.094 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_125" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="37.996 -23.069 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_125" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="37.121 -16.326 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_L_126" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="37.204 -23.172 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Buoy_R_126" type="sphere" collisions="false">
+    <dimensions radius="0.290"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceYellow"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="36.329 -16.428 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="START_Ball_L" type="sphere" collisions="false">
+    <dimensions radius="0.470"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceGreen"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="2.000 3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="START_Ball_R" type="sphere" collisions="false">
+    <dimensions radius="0.470"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceGreen"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="2.000 -3.400 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP01_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP01" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="14.000 -4.750 -1.250" rpy="0 0 3.141593"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP01_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP01" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="14.000 -4.750 -2.320" rpy="0 0 3.141593"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP01_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP01_Left" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="14.000 4.750 -1.250" rpy="0 0 3.141593"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP01_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP01" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="14.000 4.750 -2.320" rpy="0 0 3.141593"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP02_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP02" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="32.959 1.309 -1.250" rpy="0 0 3.984936"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP02_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP02" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="32.959 1.309 -2.320" rpy="0 0 3.984936"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP02_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP02_Left" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="25.864 7.627 -1.250" rpy="0 0 3.984936"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP02_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP02" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="25.864 7.627 -2.320" rpy="0 0 3.984936"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP03_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP03" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="44.231 3.210 -1.250" rpy="0 0 2.928771"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP03_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP03" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="44.231 3.210 -2.320" rpy="0 0 2.928771"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP03_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP03_Left" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="46.238 12.495 -1.250" rpy="0 0 2.928771"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP03_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP03" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="46.238 12.495 -2.320" rpy="0 0 2.928771"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP04_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP04" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="55.754 -8.003 -1.250" rpy="0 0 2.539913"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP04_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP04" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="55.754 -8.003 -2.320" rpy="0 0 2.539913"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP04_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP04_Left" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="61.131 -0.172 -1.250" rpy="0 0 2.539913"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP04_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP04" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="61.131 -0.172 -2.320" rpy="0 0 2.539913"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP05_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP05" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="77.026 -10.750 -1.250" rpy="0 0 3.141593"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP05_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP05" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="77.026 -10.750 -2.320" rpy="0 0 3.141593"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP05_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP05_Left" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="77.026 -1.250 -1.250" rpy="0 0 3.141593"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP05_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP05" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="77.026 -1.250 -2.320" rpy="0 0 3.141593"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP06_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP06" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="90.455 -12.768 -1.250" rpy="0 0 2.667558"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP06_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP06" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="90.455 -12.768 -2.320" rpy="0 0 2.667558"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP06_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP06_Left" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="94.792 -4.315 -1.250" rpy="0 0 2.667558"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP06_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP06" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="94.792 -4.315 -2.320" rpy="0 0 2.667558"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP07_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP07" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="99.146 -23.270 -1.250" rpy="0 0 1.831822"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP07_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP07" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="99.146 -23.270 -2.320" rpy="0 0 1.831822"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP07_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP07_Left" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="108.324 -20.818 -1.250" rpy="0 0 1.831822"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP07_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP07" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="108.324 -20.818 -2.320" rpy="0 0 1.831822"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP08_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP08" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="96.749 -36.224 -1.250" rpy="0 0 0.917427"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP08_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP08" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="96.749 -36.224 -2.320" rpy="0 0 0.917427"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP08_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP08_Left" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="104.292 -41.999 -1.250" rpy="0 0 0.917427"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP08_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP08" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="104.292 -41.999 -2.320" rpy="0 0 0.917427"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP09_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP09" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="86.057 -41.164 -1.250" rpy="0 0 6.205567"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP09_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP09" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="86.057 -41.164 -2.320" rpy="0 0 6.205567"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP09_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP09_Left" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="85.320 -50.635 -1.250" rpy="0 0 6.205567"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP09_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP09" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="85.320 -50.635 -2.320" rpy="0 0 6.205567"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP10_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP10" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="77.423 -34.770 -1.250" rpy="0 0 5.022691"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP10_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP10" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="77.423 -34.770 -2.320" rpy="0 0 5.022691"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP10_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP10_Left" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="68.377 -37.671 -1.250" rpy="0 0 5.022691"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP10_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP10" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="68.377 -37.671 -2.320" rpy="0 0 5.022691"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP11_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP11" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="73.999 -18.170 -1.250" rpy="0 0 5.247222"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP11_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP11" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="73.999 -18.170 -2.320" rpy="0 0 5.247222"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP11_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP11_Left" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="65.825 -23.012 -1.250" rpy="0 0 5.247222"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP11_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP11" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="65.825 -23.012 -2.320" rpy="0 0 5.247222"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP12_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP12" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="50.831 -13.185 -1.250" rpy="0 0 0.129042"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP12_R" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP12" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="50.831 -13.185 -2.320" rpy="0 0 0.129042"/>
+    </trajectory>
+  </animated>
+  <animated name="Aruco_Direction_CP12_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 1.60"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Sign_CP12_Left" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="52.053 -22.606 -1.250" rpy="0 0 0.129042"/>
+    </trajectory>
+  </animated>
+  <animated name="Arrow_Direction_CP12_L" type="box" collisions="false">
+    <dimensions xyz="0.035 1.60 0.48"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="Arrow_CP12" uv_mode="1"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="52.053 -22.606 -2.320" rpy="0 0 0.129042"/>
+    </trajectory>
+  </animated>
+  <animated name="FINISH_Ball_L" type="sphere" collisions="false">
+    <dimensions radius="0.470"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceRed"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="39.683 -22.850 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+  <animated name="FINISH_Ball_R" type="sphere" collisions="false">
+    <dimensions radius="0.470"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="MarkerMaterial"/>
+    <look name="RaceRed"/>
+    <trajectory type="manual">
+      <keypoint time="0.0" xyz="38.808 -16.107 -0.400" rpy="0 0 0"/>
+    </trajectory>
+  </animated>
+</scenario>
