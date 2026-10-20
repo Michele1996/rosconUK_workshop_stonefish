@@ -1,0 +1,41 @@
+{
+  "source_robot": "bluerov2_neutrally_buoyant(1).scn",
+  "source_mesh_zip": "bluerov2_unphy.zip",
+  "mesh_geometry": "original supplied BlueROV2 external parts, original mass/buoyancy elements and all eight thruster configurations",
+  "omitted_original_sensors": "experimental IMU variants, segmentation camera, depthcamera, multibeam to support common workshop Stonefish 1.6",
+  "imu": "Stonefish 1.6 standard documented sensor, 100 Hz, /bluerov2/imu/data; no custom imu_model or experimental extensions",
+  "camera_image_topic": "/bluerov2/camera/image_raw",
+  "odom_baseline_topic": "/bluerov2/odom",
+  "source_seabed_texture": "sand.jpg",
+  "seabed_texture": "photogrammetry/textures/seabed.jpg",
+  "new_rocks": 0,
+  "unique_rock_meshes": 0,
+  "synthetic_heightmap": true,
+  "runtime_visual_validation": "pending user-run Stonefish graphical confirmation",
+  "seabed_texture_policy": "unaltered user sand.jpg sampled repeatedly by Stonefish terrain uv_scale=0.12; not a derived mosaic; no rocks",
+  "source_texture_sha256": "3d54f5b4ef7d0402c31a25a0f56dff73995f91332ec0a836074707fd907954a9",
+  "ocean_water_density_kg_m3": 1031.0,
+  "ocean_jerlov": 0.1,
+  "ocean_particles_enabled": false,
+  "original_robot_restored_elements": [
+    "link_m",
+    "base_link_to_multibeam"
+  ],
+  "original_robot_physical_parts_unchanged": true,
+  "buoyancy_check": {
+    "method": "approximation: buoyant box volumes + HeavyFit 5mm shell area; not a Stonefish measured hover test",
+    "internal_buoyant_volume_m3": 0.01092,
+    "explicit_parts_mass_kg": 10.8423,
+    "heavyfit_mesh_area_m2": 0.08306529202109274,
+    "heavyfit_shell_mass_est_kg": 0.4153264601054637,
+    "net_buoyancy_equivalent_kg": 0.0009245398945356698
+  },
+  "terrain_source": "previous featured heightmap restored without editing (pre-flattening version)",
+  "relief_span_m": 1.0329,
+  "vehicle_mounted_lights": 0,
+  "removed_vehicle_lights": [
+    "SurveyPortLamp",
+    "SurveyStarboardLamp"
+  ],
+  "static_survey_scene_lights": 6
+}

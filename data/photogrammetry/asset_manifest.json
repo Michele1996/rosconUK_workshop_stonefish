@@ -1,0 +1,152 @@
+{
+  "cat": {
+    "scale": 4.593477262287552,
+    "extent_m": [
+      0.703,
+      1.148,
+      1.3
+    ],
+    "source": "concrete_cat_statue_4k.obj",
+    "components": [
+      {
+        "file": "cat_textured.obj",
+        "texture": "cat",
+        "vertices": 6863,
+        "triangles": 11950
+      }
+    ]
+  },
+  "bust": {
+    "scale": 2.6216493864369452,
+    "extent_m": [
+      0.712,
+      0.786,
+      1.35
+    ],
+    "source": "marble_bust_01_4k.obj",
+    "components": [
+      {
+        "file": "bust_textured.obj",
+        "texture": "bust",
+        "vertices": 9746,
+        "triangles": 17456
+      }
+    ]
+  },
+  "wr": {
+    "scale": 0.3119836948407256,
+    "extent_m": [
+      6.854,
+      21.619,
+      2.8
+    ],
+    "source": "ship_wreck.obj",
+    "components": [
+      {
+        "file": "wr_00.obj",
+        "material": "Material.004",
+        "texture": "outside",
+        "vertices": 234972,
+        "triangles": 78324
+      },
+      {
+        "file": "wr_01.obj",
+        "material": "clou",
+        "texture": null,
+        "vertices": 1476,
+        "triangles": 2400
+      },
+      {
+        "file": "wr_02.obj",
+        "material": "Material.003",
+        "texture": "outside",
+        "vertices": 416,
+        "triangles": 508
+      },
+      {
+        "file": "wr_03.obj",
+        "material": "Material.001",
+        "texture": "outside",
+        "vertices": 23405,
+        "triangles": 8014
+      },
+      {
+        "file": "wr_04.obj",
+        "material": "Material.002",
+        "texture": "poutre",
+        "vertices": 853,
+        "triangles": 1514
+      },
+      {
+        "file": "wr_05.obj",
+        "material": "material-0.003",
+        "texture": "pont_milieu",
+        "vertices": 76607,
+        "triangles": 123770
+      },
+      {
+        "file": "wr_06.obj",
+        "material": "material-0.002",
+        "texture": "crane",
+        "vertices": 4661,
+        "triangles": 6069
+      },
+      {
+        "file": "wr_07.obj",
+        "material": "material-0.001",
+        "texture": "pont_arriere",
+        "vertices": 80709,
+        "triangles": 121056
+      },
+      {
+        "file": "wr_08.obj",
+        "material": "material-0.004",
+        "texture": "interior",
+        "vertices": 36238,
+        "triangles": 52043
+      },
+      {
+        "file": "wr_09.obj",
+        "material": "clou.001",
+        "texture": null,
+        "vertices": 1230,
+        "triangles": 2000
+      },
+      {
+        "file": "wr_10.obj",
+        "material": "Material.006",
+        "texture": "outside",
+        "vertices": 213472,
+        "triangles": 72904
+      },
+      {
+        "file": "wr_11.obj",
+        "material": "Material.005",
+        "texture": "outside",
+        "vertices": 416,
+        "triangles": 508
+      },
+      {
+        "file": "wr_12.obj",
+        "material": "Material.008",
+        "texture": "sol_obj1",
+        "vertices": 30381,
+        "triangles": 36634
+      },
+      {
+        "file": "wr_13.obj",
+        "material": "Material.009",
+        "texture": "sol",
+        "vertices": 32746,
+        "triangles": 45054
+      },
+      {
+        "file": "wr_14.obj",
+        "material": "Material.007",
+        "texture": "sol_obj",
+        "vertices": 50305,
+        "triangles": 47788
+      }
+    ]
+  }
+}

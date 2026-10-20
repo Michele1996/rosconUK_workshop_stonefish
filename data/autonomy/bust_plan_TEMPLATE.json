@@ -1,0 +1,6 @@
+{
+  "target": "bust",
+  "frame": "world_ned",
+  "waypoints": [],
+  "instructions": "EXERCISE: fill waypoints with {x,y,z,yaw,phase}. Valid phases SEARCH, TRANSIT, APPROACH, INSPECT; >=4 inspection poses spanning >=3 azimuth sectors; a generic safe RETURN route is appended at runtime. Explore the obstacle scene and plan viewpoints. Then run autonomy_plan_check."
+}

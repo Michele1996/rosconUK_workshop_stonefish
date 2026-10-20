@@ -1,0 +1,829 @@
+<?xml version="1.0"?>
+<scenario>
+	<looks>
+		<look name="br2" gray="1.0" roughness="0.4" metalness="0.5" texture="bluerov2_unphy/br2.png"/>
+		<look name="blue" rgb="0.0 0.5 1.0" roughness="0.3"/>
+	</looks>
+
+	<robot name="bluerov2" fixed="false" self_collisions="false">
+		<base_link name="base_link" type="compound" physics="submerged">
+			<external_part name="HullBottom" type="model" physics="submerged" buoyant="false">
+				<physical>
+					<mesh filename="bluerov2_unphy/bluerov2_phy.obj" scale="1"/>
+					<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+					<thickness value="0.005"/>
+				</physical>
+				<visual>
+					<mesh filename="bluerov2_unphy/bluerov2.obj" scale="1"/>
+					<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				</visual>
+				<material name="Neutral"/>
+				<look name="br2"/>
+				<compound_transform rpy="0 0.0 0.0" xyz="-0.0 0.0 0.0"/>
+				<mass value="6.9923"/>
+			</external_part>
+
+			<external_part name="HeavyFit" type="model" physics="submerged" buoyant="false">
+				<physical>
+					<mesh filename="bluerov2_unphy/bluerov2_ring.obj" scale="1"/>
+					<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.03"/>
+					<thickness value="0.005"/>
+				</physical>
+				<visual>
+					<mesh filename="bluerov2_unphy/bluerov2_wings.obj" scale="1"/>
+					<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				</visual>
+				<material name="Neutral"/>
+				<look name="black"/>
+				<compound_transform rpy="0 0.0 0.0" xyz="-0.0 0.0 0.0"/>
+			</external_part>
+
+			<internal_part name="BackLeft" type="box" physics="submerged" buoyant="true">
+				<dimensions xyz="0.2 0.15 0.091"/>
+				<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+				<material name="Neutral"/>
+				<look name="None"/>
+				<mass value="0.025"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="-0.1 -0.1 0.0"/>
+			</internal_part>
+
+			<internal_part name="BackRight" type="box" physics="submerged" buoyant="true">
+				<dimensions xyz="0.2 0.15 0.091"/>
+				<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+				<material name="Neutral"/>
+				<look name="None"/>
+				<mass value="0.025"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="-0.1 0.1 0.0"/>
+			</internal_part>
+
+			<internal_part name="FrontLeft" type="box" physics="submerged" buoyant="true">
+				<dimensions xyz="0.2 0.15 0.091"/>
+				<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+				<material name="Neutral"/>
+				<look name="None"/>
+				<mass value="0.025"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="0.09 -0.1 0.0"/>
+			</internal_part>
+
+			<internal_part name="FrontRight" type="box" physics="submerged" buoyant="true">
+				<dimensions xyz="0.2 0.15 0.091"/>
+				<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+				<material name="Neutral"/>
+				<look name="None"/>
+				<mass value="0.025"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="0.09 0.1 0.0"/>
+			</internal_part>
+
+			<!-- <internal_part name="TopLeft" type="cylinder" physics="submerged" buoyant="true">
+				<dimensions radius="0.04" height="0.32"/>
+				<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				<material name="Neutral"/>
+				<mass value="0.1"/>
+				<look name="manipulator"/>
+				<compound_transform rpy="0.0 1.571 0.0" xyz="-0.005 -0.1 0.0"/>
+			</internal_part> 
+
+			<internal_part name="TopRight" type="cylinder" physics="submerged" buoyant="true">
+				<dimensions radius="0.04" height="0.32"/>
+				<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+				<material name="Neutral"/>
+				<mass value="0.1"/>
+				<look name="manipulator"/>
+				<compound_transform rpy="0.0 1.571 0.0" xyz="-0.005 0.1 0.0"/>
+			</internal_part>  -->
+
+			<!-- <internal_part name="BuoyLeft" type="sphere" physics="submerged" buoyant="true">
+				<dimensions radius="0.075"/>
+				<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+				<material name="Neutral"/>
+				<look name="Blue"/>
+				<mass value=".05"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="-0.005 -0.075 0.0"/>
+			</internal_part>
+
+			<internal_part name="BuoyRight" type="sphere" physics="submerged" buoyant="true">
+				<dimensions radius="0.075"/>
+				<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+				<material name="Neutral"/>
+				<look name="Blue"/>
+				<mass value=".05"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="-0.005 0.075 0.0"/>
+			</internal_part> -->
+
+			<internal_part name="WeightCenter" type="sphere" physics="submerged" buoyant="false">
+				<dimensions radius="0.01"/>
+				<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+				<material name="Steel"/>
+				<look name="black"/>
+				<mass value="1.75"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.1"/>
+			</internal_part>
+
+			<internal_part name="WeightLeft" type="sphere" physics="submerged" buoyant="false">
+				<dimensions radius="0.01"/>
+				<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+				<material name="Steel"/>
+				<look name="black"/>
+				<mass value="1"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="0.0 -0.075 0.1"/>
+			</internal_part>
+
+			<internal_part name="WeightRight" type="sphere" physics="submerged" buoyant="false">
+				<dimensions radius="0.01"/>
+				<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+				<material name="Steel"/>
+				<look name="black"/>
+				<mass value="1"/>
+				<compound_transform rpy="0.0 0.0 0.0" xyz="0.0 0.075 0.1"/>
+			</internal_part>
+		</base_link>
+		
+		<!-- Thruster 1 -->
+		<actuator name="FrontRight" type="thruster">
+			<link name="base_link"/>
+			<origin xyz="0.1355 0.1 0.0725" rpy="0 0 -0.7853981634"/>
+			<specs max_setpoint="366.5" inverted_setpoint="true" normalized_setpoint="true"/>
+			<propeller diameter="0.076" right="false">
+				<mesh filename="bluerov2_unphy/cw.obj" scale="1.0"/>
+				<material name="Neutral"/>
+				<look name="blue"/>
+			</propeller>
+			<rotor_dynamics type="first_order">
+			    <time_constant value="0.2"/>
+			</rotor_dynamics>
+			<thrust_model type="fluid_dynamics">
+			    <thrust_coeff forward="0.07" reverse="0.11"/>
+			    <torque_coeff value="0.015"/>
+			</thrust_model>
+		</actuator>
+
+		<!-- Thruster 2 -->
+		<actuator name="FrontLeft" type="thruster">
+			<link name="base_link"/>
+			<origin xyz="0.1355 -0.1 0.0725" rpy="0 0 0.7853981634"/>
+			<specs max_setpoint="366.5" inverted_setpoint="false" normalized_setpoint="true"/>
+			<propeller diameter="0.076" right="true">
+				<mesh filename="bluerov2_unphy/ccw.obj" scale="1.0"/>
+				<material name="Neutral"/>
+				<look name="blue"/>
+			</propeller>
+			<rotor_dynamics type="first_order">
+			    <time_constant value="0.2"/>
+			</rotor_dynamics>
+			<thrust_model type="fluid_dynamics">
+			    <thrust_coeff forward="0.07" reverse="0.11"/>
+			    <torque_coeff value="0.015"/>
+			</thrust_model>
+		</actuator>
+
+		<!-- Thruster 3 -->
+		<actuator name="BackRight" type="thruster">
+			<link name="base_link"/>
+			<origin xyz="-0.1475 0.1 0.0725" rpy="0 0 -2.3561944902"/>
+			<specs max_setpoint="366.5" inverted_setpoint="true" normalized_setpoint="true"/>
+			<propeller diameter="0.076" right="false">
+				<mesh filename="bluerov2_unphy/cw.obj" scale="1.0"/>
+				<material name="Neutral"/>
+				<look name="blue"/>
+			</propeller>
+			<rotor_dynamics type="first_order">
+			    <time_constant value="0.2"/>
+			</rotor_dynamics>
+			<thrust_model type="fluid_dynamics">
+			    <thrust_coeff forward="0.07" reverse="0.11"/>
+			    <torque_coeff value="0.015"/>
+			</thrust_model>
+		</actuator>
+
+		<!-- Thruster 4 -->
+		<actuator name="BackLeft" type="thruster">
+			<link name="base_link"/>
+			<origin xyz="-0.1475 -0.1 0.0725" rpy="0 0 2.3561944902"/>
+			<specs max_setpoint="366.5" inverted_setpoint="false" normalized_setpoint="true"/>
+			<propeller diameter="0.076" right="true">
+				<mesh filename="bluerov2_unphy/ccw.obj" scale="1.0"/>
+				<material name="Neutral"/>
+				<look name="blue"/>
+			</propeller>
+			<rotor_dynamics type="first_order">
+				<time_constant value="0.2"/>
+			</rotor_dynamics>
+			<thrust_model type="fluid_dynamics">
+			    <thrust_coeff forward="0.07" reverse="0.11"/>
+			    <torque_coeff value="0.015"/>
+		        </thrust_model>
+		</actuator>
+
+		<!-- Thruster 5 -->
+		<actuator name="DiveFrontRight" type="thruster">
+			<link name="base_link"/>
+			<origin xyz="0.12 0.218 0.0" rpy="0 -1.5707963268 0"/>
+			<specs max_setpoint="366.5" inverted_setpoint="true" normalized_setpoint="true"/>
+			<propeller diameter="0.076" right="true">
+				<mesh filename="bluerov2_unphy/cw.obj" scale="1.0"/>
+				<material name="Neutral"/>
+				<look name="blue"/>
+			</propeller>
+		    <rotor_dynamics type="first_order">
+			<time_constant value="0.2"/>
+		    </rotor_dynamics>
+		    <thrust_model type="fluid_dynamics">
+			<thrust_coeff forward="0.07" reverse="0.11"/>
+			<torque_coeff value="0.015"/>
+		    </thrust_model>
+		</actuator>
+
+		<!-- Thruster 6 -->
+		<actuator name="DiveFrontLeft" type="thruster">
+			<link name="base_link"/>
+			<origin xyz="0.12 -0.218 0.0" rpy="0 -1.5707963268 0"/>
+			<specs max_setpoint="366.5" inverted_setpoint="true" normalized_setpoint="true"/>
+			<propeller diameter="0.076" right="false">
+				<mesh filename="bluerov2_unphy/ccw.obj" scale="1.0"/>
+				<material name="Neutral"/>
+				<look name="blue"/>
+			</propeller>
+		    <rotor_dynamics type="first_order">
+			<time_constant value="0.2"/>
+		    </rotor_dynamics>
+		    <thrust_model type="fluid_dynamics">
+			<thrust_coeff forward="0.07" reverse="0.11"/>
+			<torque_coeff value="0.015"/>
+		    </thrust_model>
+		</actuator>
+		
+		<!-- Thruster 7 -->
+		<actuator name="DiveBackRight" type="thruster">
+			<link name="base_link"/>
+			<origin xyz="-0.12 0.218 0.0" rpy="0 -1.5707963268 0"/>
+			<specs max_setpoint="366.5" inverted_setpoint="true" normalized_setpoint="true"/>
+			<propeller diameter="0.076" right="false">
+				<mesh filename="bluerov2_unphy/ccw.obj" scale="1.0"/>
+				<material name="Neutral"/>
+				<look name="blue"/>
+			</propeller>
+		    <rotor_dynamics type="first_order">
+			<time_constant value="0.2"/>
+		    </rotor_dynamics>
+		    <thrust_model type="fluid_dynamics">
+			<thrust_coeff forward="0.07" reverse="0.11"/>
+			<torque_coeff value="0.015"/>
+		    </thrust_model>
+		</actuator>
+
+		<!-- Thruster 8 -->
+		<actuator name="DiveBackLeft" type="thruster">
+			<link name="base_link"/>
+			<origin xyz="-0.12 -0.218 0.0" rpy="0 -1.5707963268 0"/>
+			<specs max_setpoint="366.5" inverted_setpoint="true" normalized_setpoint="true"/>
+			<propeller diameter="0.076" right="true">
+				<mesh filename="bluerov2_unphy/cw.obj" scale="1.0"/>
+				<material name="Neutral"/>
+				<look name="blue"/>
+			</propeller>
+		    <rotor_dynamics type="first_order">
+			<time_constant value="0.2"/>
+		    </rotor_dynamics>
+		    <thrust_model type="fluid_dynamics">
+			<thrust_coeff forward="0.07" reverse="0.11"/>
+			<torque_coeff value="0.015"/>
+		    </thrust_model>
+		</actuator>
+				
+		<link name="link_m" type="box" physics="submerged">
+			<dimensions xyz="0.01 0.01 0.01"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<material name="Neutral"/>
+			<look name="blue"/>
+		</link>
+		
+		<joint name="base_link_to_multibeam" type="fixed">
+			<parent name="base_link"/>
+			<child name="link_m"/>
+			<origin xyz="0.2 0.0 0.3" rpy="0.0 0.0 0.0"/>
+			<axis xyz="0.0 0.0 1.0"/>
+		</joint>
+		
+		<!--<actuator name="Servo" type="servo">
+		    <joint name="base_link_to_sonar"/>
+		    <controller position_gain="1.0" velocity_gain="1.0" max_torque="10.0" max_velocity="0.1" dt_scale_factor="50" mode="position"/>
+		</actuator>-->
+
+		<sensor name="odometry" type="odometry" rate="100.0">
+			<!--<noise position="0.05" velocity="0.01" angle="0.1" angular_velocity="0.05"/>-->
+			<link name="base_link"/>
+			<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+			<ros_publisher topic="/bluerov2/odometry"/>
+		</sensor>
+
+		<!--<sensor name="INS" rate="100.0" type="ins">
+			<output_frame rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+			<noise angular_velocity="0" linear_acceleration="0"/>
+			<external_sensors dvl="dvl" gps="gps" pressure="pressure" gyro="Gyro" />
+			<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+			<link name="base_link"/>
+			<ros_publisher topic="/bluerov/INS"/>
+		</sensor>--> 
+
+		<sensor name="pressure" type="pressure" rate="10.0">
+			<link name="base_link"/>
+			<origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+			<noise pressure="0.1"/>
+			<ros_publisher topic="/bluerov2/pressure"/>
+		</sensor>
+			
+		<sensor name="gps" rate="2.0" type="gps">
+    			<noise ned_position="0.0"/>
+    			<history samples="1"/>
+    			<origin xyz="0.0 0.0 -0.2" rpy="0.0 0.0 0.0"/>
+    			<link name="base_link"/>
+    			<ros_publisher topic="/bluerov2/gps"/>
+		</sensor>
+	
+		<sensor name="Gyro" rate="10.0" type="gyro">
+		    <range angular_velocity="100.0 100.0 200.0"/>
+		    <noise angular_velocity="0.0" bias="0.00"/>
+		    <history samples="1"/>
+		    <origin xyz="0.1 0.0 0.0" rpy="0.0 0.0 0.0"/>
+		    <link name="base_link"/>
+		</sensor>
+
+
+		<sensor name="camera_front" type="segmentation" rate="10.0">
+			<link name="base_link"/>
+			<origin rpy="1.2 0.0 1.571" xyz="0.45 0.0 -0.1"/>
+			<specs resolution_x="1360" resolution_y="1024" horizontal_fov="55.0" segmentation_type="semantic"/>
+			<ros_publisher topic="/bluerov/segmentation_camera_front"/>
+		</sensor>	
+		
+		
+		<sensor name="dvl" type="dvl" rate="15.0">
+			<link name="base_link"/>
+			<origin rpy="3.1416 0.0 0.0" xyz="0.0 0.0 0.0"/>
+			<specs beam_angle="30.0"/>
+			<range velocity="9.0 9.0 9.0" altitude_min="0.2" altitude_max="100.0"/>
+			<noise velocity_percent="0.1"/>
+			<ros_publisher topic="/bluerov2/dvl" 
+						   altitude_topic="/bluerov2/altitude"/>
+		</sensor>
+		
+		<!--<sensor name="FLS" type="fls" rate="5">
+		    <specs beams="512" bins="512" horizontal_fov="120.0" vertical_fov="20"/>
+		    <settings range_min="0.5" range_max="10" gain="2"/>
+		    <noise multiplicative="0.2" additive="0.2"/>
+		    <display colormap="hot"/>
+		    <origin xyz="0 0 0" rpy="0 0 0"/>
+		    <link name="sonar_link"/>
+		    <ros_publisher topic="/bluerov2/sonar"/>
+		</sensor>-->
+
+		<sensor name="multibeam_link" rate="1.0" type="multibeam">
+		    <specs fov="120.0" steps="128"/>
+		    <range distance_min="0.5" distance_max="50.0"/>
+		    <noise distance="0.1"/>
+		    <history samples="1"/>
+		    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+		    <link name="link_m"/>
+<ros_publisher topic="/bluerov2/multibeam_link/scan" pcl_topic="/bluerov2/multibeam_link/pcd"/>
+		</sensor>
+		
+		
+
+    
+  
+<!-- Four co-located IMUs: ground-truth kinematics, legacy, nominal v5.5, and optional stress-test. -->
+<!-- NOTE: The fourth IMU is intentionally NOT a calibrated Navigator model. -->
+<sensor name="IMU_perfect" rate="100.0" type="imu">
+    <range angular_velocity="34.906585" linear_acceleration="156.9064"/>
+    <noise angle="0" angular_velocity="0" yaw_drift="0" linear_acceleration="0"/>
+    <history samples="2000"/>
+    <origin xyz="0.1 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <link name="base_link"/>
+    <ros_publisher topic="/bluerov2/imu/perfect"/>
+</sensor>
+
+<sensor name="IMU_original" rate="100.0" type="imu">
+    <range angular_velocity="10.0 10.0 5.0" linear_acceleration="10.0"/>
+    <noise angle="0.1 0.1 0.5" angular_velocity="0.05" yaw_drift="0.001" linear_acceleration="0.1"/>
+    <history samples="2000"/>
+    <origin xyz="0.1 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <link name="base_link"/>
+    <ros_publisher topic="/bluerov2/imu/original"/>
+</sensor>
+
+<sensor name="IMU_advanced" type="imu" rate="100.0">
+    <link name="base_link"/>
+    <origin xyz="0.1 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <!-- ICM-20602 example range: gyro +/-2000 deg/s; accel +/-16g -->
+    <range angular_velocity="34.906585" linear_acceleration="156.9064"/>
+    <noise angle="0" angular_velocity="0" linear_acceleration="0" yaw_drift="0"/>
+    <imu_model
+        gyro_noise_density="0.00006981317"
+        accel_noise_density="0.000980665"
+        gyro_bias_walk="0.000001"
+        gyro_bias_walk_xyz="0.000001 0.000001 0.000001"
+        accel_bias_walk="0.00002"
+        accel_bias_walk_xyz="0.00002 0.00002 0.00002"
+        gyro_bias="0.001  -0.0005  0.0015"
+        accel_bias="0.02 -0.015 0.025"
+        gyro_scale_error="0.001 -0.001 0.0005"
+        accel_scale_error="0.002 -0.001 0.001"
+        gyro_misalignment="0.001 0 0"
+        accel_misalignment="0 0.001 0"
+        gyro_quantization="0.0010652644"
+        accel_quantization="0.0047884"
+        gyro_flicker_rms="0.00012"
+        accel_flicker_rms="0.002"
+        flicker_tau_min_s="0.1"
+        flicker_tau_max_s="3000"
+        impulse_probability="0"
+        impulse_gyro_stddev="0.005"
+        impulse_accel_stddev="0.1"
+        impulse_student_df="4"
+        bias_jump_rate_hz="0"
+        bias_jump_gyro_stddev="0.0003"
+        bias_jump_accel_stddev="0.005"
+        gyro_correlation_time="30"
+        accel_correlation_time="30"
+        gyro_colored_stddev="0.00004"
+        accel_colored_stddev="0.001"
+        gyro_bandwidth_hz="41"
+        accel_bandwidth_hz="41"
+        clock_offset_s="0.003"
+        clock_skew_ppm="10"
+        timestamp_jitter_std_s="0.0001"
+        vibration_amplitude="0.02"
+        vibration_frequency="30"
+        vibration_gyro_amplitude="0.0002"
+        vibration_second_harmonic="0.2"
+        temperature="25"
+        reference_temperature="25"
+        gyro_temperature_coefficient="0"
+        accel_temperature_coefficient="0"
+        seed="42"/>
+    <history samples="2000"/>
+    <ros_publisher topic="/bluerov2/imu/advanced"/>
+</sensor>
+
+
+
+
+<sensor name="IMU_robustness" type="imu" rate="20.0">
+    <link name="base_link"/>
+    <origin xyz="0.1 0.0 0.0" rpy="0.0 0.0 0.0"/>
+
+    <!-- ICM-20602 measurement ranges -->
+    <range angular_velocity="34.906585" linear_acceleration="156.9064"/>
+
+    <noise angle="0" angular_velocity="0" linear_acceleration="0" yaw_drift="0"/>
+
+    <!-- BlueROV2 IMU: provisional axis-specific noise configuration -->
+    <imu_model
+        gyro_noise_density_xyz="0.000060 0.000024 0.000050"
+        accel_noise_density_xyz="0.001120 0.001050 0.001200"
+
+        gyro_bias_walk_xyz="0.000002 0.000001 0.000002"
+        accel_bias_walk_xyz="0.000040 0.000040 0.000030"
+
+        gyro_bias="0.001 -0.0005 0.0015"
+        accel_bias="0.020 -0.015 0.025"
+
+        gyro_scale_error="0.001 -0.001 0.0005"
+        accel_scale_error="0.002 -0.001 0.001"
+
+        gyro_misalignment="0.001 0 0"
+        accel_misalignment="0 0.001 0"
+
+        gyro_quantization_xyz="0.0010652644 0.0010652644 0.0010652644"
+        accel_quantization_xyz="0.0047884 0.0047884 0.0047884"
+
+        gyro_flicker_rms_xyz="0.000060 0.000020 0.000060"
+        accel_flicker_rms_xyz="0.00070 0.00065 0.00045"
+
+        flicker_tau_min_s="0.1"
+        flicker_tau_max_s="3000"
+
+        impulse_probability="0.0001"
+        impulse_gyro_stddev="0.005"
+        impulse_accel_stddev="0.1"
+        impulse_student_df="4"
+
+        bias_jump_rate_hz="0.0002"
+        bias_jump_gyro_stddev="0.0003"
+        bias_jump_accel_stddev="0.005"
+
+        gyro_correlation_time="30"
+        accel_correlation_time="30"
+
+        gyro_colored_stddev_xyz="0.000025 0.000010 0.000030"
+        accel_colored_stddev_xyz="0.00060 0.00055 0.00040"
+
+        gyro_bandwidth_hz="8"
+        accel_bandwidth_hz="8"
+
+        clock_offset_s="0.003"
+        clock_skew_ppm="10"
+        timestamp_jitter_std_s="0.0001"
+
+        vibration_amplitude="0.02"
+        vibration_frequency="30"
+        vibration_gyro_amplitude="0.0002"
+        vibration_second_harmonic="0.2"
+
+        temperature="25"
+        reference_temperature="25"
+
+        gyro_temperature_coefficient_xyz="0 0 0"
+        accel_temperature_coefficient_xyz="0 0 0"
+
+        covariance_mode="effective"
+        covariance_window_s="2.0"
+
+        vibration_gyro_motion_gain="0.2"
+        vibration_accel_motion_gain="0.2"
+
+        seed="43"
+    />
+
+    <history samples="2000"/>
+    <ros_publisher topic="/bluerov2/imu/robustness"/>
+</sensor>
+
+
+<sensor name="IMU_advanced_effective" type="imu" rate="100.0">
+    <link name="base_link"/>
+    <origin xyz="0.1 0.0 0.0" rpy="0.0 0.0 0.0"/>
+
+    <!-- ICM-20602 example range: gyro +/-2000 deg/s; accel +/-16g -->
+    <range angular_velocity="34.906585" linear_acceleration="156.9064"/>
+
+    <noise angle="0" angular_velocity="0" linear_acceleration="0" yaw_drift="0"/>
+
+    <imu_model
+        gyro_noise_density="0.00006981317"
+        accel_noise_density="0.000980665"
+
+        gyro_bias_walk="0.000001"
+        gyro_bias_walk_xyz="0.000001 0.000001 0.000001"
+        accel_bias_walk="0.00002"
+        accel_bias_walk_xyz="0.00002 0.00002 0.00002"
+
+        gyro_bias="0.001 -0.0005 0.0015"
+        accel_bias="0.02 -0.015 0.025"
+
+        gyro_scale_error="0.001 -0.001 0.0005"
+        accel_scale_error="0.002 -0.001 0.001"
+
+        gyro_misalignment="0.001 0 0"
+        accel_misalignment="0 0.001 0"
+
+        gyro_quantization="0.0010652644"
+        accel_quantization="0.0047884"
+
+        gyro_flicker_rms="0.00012"
+        accel_flicker_rms="0.002"
+        flicker_tau_min_s="0.1"
+        flicker_tau_max_s="3000"
+
+        impulse_probability="0"
+        impulse_gyro_stddev="0.005"
+        impulse_accel_stddev="0.1"
+        impulse_student_df="4"
+
+        bias_jump_rate_hz="0"
+        bias_jump_gyro_stddev="0.0003"
+        bias_jump_accel_stddev="0.005"
+
+        gyro_correlation_time="30"
+        accel_correlation_time="30"
+        gyro_colored_stddev="0.00004"
+        accel_colored_stddev="0.001"
+
+        gyro_bandwidth_hz="41"
+        accel_bandwidth_hz="41"
+
+        clock_offset_s="0.003"
+        clock_skew_ppm="10"
+        timestamp_jitter_std_s="0.0001"
+
+        vibration_amplitude="0.02"
+        vibration_frequency="30"
+        vibration_gyro_amplitude="0.0002"
+        vibration_second_harmonic="0.2"
+
+        covariance_mode="effective"
+        covariance_window_s="2.0"
+        vibration_gyro_motion_gain="0.2"
+        vibration_accel_motion_gain="0.2"
+
+        temperature="25"
+        reference_temperature="25"
+        gyro_temperature_coefficient="0"
+        accel_temperature_coefficient="0"
+
+        seed="42"/>
+
+    <history samples="2000"/>
+    <ros_publisher topic="/bluerov2/imu/advanced_effective"/>
+</sensor>
+
+<sensor name="IMU_no_vibro" type="imu" rate="100.0">
+    <link name="base_link"/>
+    <origin xyz="0.1 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <!-- ICM-20602 example range: gyro +/-2000 deg/s; accel +/-16g -->
+    <range angular_velocity="34.906585" linear_acceleration="156.9064"/>
+    <noise angle="0" angular_velocity="0" linear_acceleration="0" yaw_drift="0"/>
+    <imu_model
+        gyro_noise_density="0.00006981317"
+        accel_noise_density="0.000980665"
+        gyro_bias_walk="0.000001"
+        gyro_bias_walk_xyz="0.000004 0.000005 0.000004"
+        accel_bias_walk="0.00002"
+        accel_bias_walk_xyz="0.00008 0.00010 0.00008"
+        gyro_bias="0.001  -0.0005  0.0015"
+        accel_bias="0.02 -0.015 0.025"
+        gyro_scale_error="0.001 -0.001 0.0005"
+        accel_scale_error="0.002 -0.001 0.001"
+        gyro_misalignment="0.001 0 0"
+        accel_misalignment="0 0.001 0"
+        gyro_quantization="0.0010652644"
+        accel_quantization="0.0047884"
+        gyro_flicker_rms="0.00012"
+        accel_flicker_rms="0.002"
+        flicker_tau_min_s="0.1"
+        flicker_tau_max_s="3000"
+        impulse_probability="0.0001"
+        impulse_gyro_stddev="0.005"
+        impulse_accel_stddev="0.1"
+        impulse_student_df="4"
+        bias_jump_rate_hz="0.0002"
+        bias_jump_gyro_stddev="0.0003"
+        bias_jump_accel_stddev="0.005"
+        gyro_correlation_time="30"
+        accel_correlation_time="30"
+        gyro_colored_stddev="0.00004"
+        accel_colored_stddev="0.001"
+        gyro_bandwidth_hz="41"
+        accel_bandwidth_hz="41"
+        clock_offset_s="0.003"
+        clock_skew_ppm="10"
+        timestamp_jitter_std_s="0.0001"
+        vibration_amplitude="0.0"
+        vibration_frequency="30"
+        vibration_gyro_amplitude="0.0"
+        vibration_second_harmonic="0.0"
+        temperature="25"
+        reference_temperature="25"
+        gyro_temperature_coefficient="0"
+        accel_temperature_coefficient="0"
+        seed="43"/>
+    <history samples="2000"/>
+    <ros_publisher topic="/bluerov2/imu/no_vibro"/>
+</sensor>
+
+
+<sensor name="IMU_white_only" type="imu" rate="100.0">
+    <link name="base_link"/>
+    <origin xyz="0.1 0.0 0.0" rpy="0 0 0"/>
+
+    <range angular_velocity="34.906585"
+           linear_acceleration="156.9064"/>
+
+    <noise angle="0"
+           angular_velocity="0"
+           linear_acceleration="0"
+           yaw_drift="0"/>
+
+    <imu_model
+        gyro_noise_density="0.00006981317"
+        accel_noise_density="0.000980665"
+
+        gyro_bias="0 0 0"
+        accel_bias="0 0 0"
+        gyro_bias_walk="0"
+        accel_bias_walk="0"
+        gyro_bias_walk_xyz="0 0 0"
+        accel_bias_walk_xyz="0 0 0"
+
+        gyro_scale_error="0 0 0"
+        accel_scale_error="0 0 0"
+        gyro_misalignment="0 0 0"
+        accel_misalignment="0 0 0"
+
+        gyro_quantization="0"
+        accel_quantization="0"
+
+        gyro_flicker_rms="0"
+        accel_flicker_rms="0"
+
+        gyro_colored_stddev="0"
+        accel_colored_stddev="0"
+
+        impulse_probability="0"
+        bias_jump_rate_hz="0"
+
+        gyro_bandwidth_hz="41"
+        accel_bandwidth_hz="41"
+
+        clock_offset_s="0"
+        clock_skew_ppm="0"
+        timestamp_jitter_std_s="0"
+
+        vibration_amplitude="0"
+        vibration_gyro_amplitude="0"
+        vibration_second_harmonic="0"
+
+        seed="44"/>
+
+    <history samples="2000"/>
+    <ros_publisher topic="/bluerov2/imu/white_only"/>
+</sensor>
+
+
+<sensor name="IMU_white_only_effective" type="imu" rate="100.0">
+    <link name="base_link"/>
+    <origin xyz="0.1 0.0 0.0" rpy="0 0 0"/>
+
+    <range angular_velocity="34.906585"
+           linear_acceleration="156.9064"/>
+
+    <noise angle="0"
+           angular_velocity="0"
+           linear_acceleration="0"
+           yaw_drift="0"/>
+
+    <imu_model
+        gyro_noise_density="0.00006981317"
+        accel_noise_density="0.000980665"
+
+        gyro_bias="0 0 0"
+        accel_bias="0 0 0"
+        gyro_bias_walk="0"
+        accel_bias_walk="0"
+        gyro_bias_walk_xyz="0 0 0"
+        accel_bias_walk_xyz="0 0 0"
+
+        gyro_scale_error="0 0 0"
+        accel_scale_error="0 0 0"
+        gyro_misalignment="0 0 0"
+        accel_misalignment="0 0 0"
+
+        gyro_quantization="0"
+        accel_quantization="0"
+
+        gyro_flicker_rms="0"
+        accel_flicker_rms="0"
+
+        gyro_colored_stddev="0"
+        accel_colored_stddev="0"
+
+        impulse_probability="0"
+        bias_jump_rate_hz="0"
+
+        gyro_bandwidth_hz="41"
+        accel_bandwidth_hz="41"
+
+        clock_offset_s="0"
+        clock_skew_ppm="0"
+        timestamp_jitter_std_s="0"
+
+        vibration_amplitude="0"
+        vibration_gyro_amplitude="0"
+        vibration_second_harmonic="0"
+
+        covariance_mode="effective"
+        covariance_window_s="2.0"
+        vibration_gyro_motion_gain="0.2"
+        vibration_accel_motion_gain="0.2"
+
+        seed="44"/>
+
+    <history samples="2000"/>
+    <ros_publisher topic="/bluerov2/imu/white_only_effective"/>
+</sensor>
+
+
+
+		<sensor name="Dcam" rate="10.0" type="depthcamera">
+		    <specs resolution_x="1600" resolution_y="1200" horizontal_fov="60.0" depth_min="0.2" depth_max="10.0"/>
+		    <noise depth="0"/>
+		<origin rpy="1.571 0.0 1.571" xyz="0.2 0.0 0.3"/>
+		    <link name="base_link"/>
+		    <ros_publisher topic="/bluerov2/dcam"/>
+		</sensor>
+		
+		<sensor name="cam" type="camera" rate="10.0">
+			<link name="base_link"/>
+			<origin rpy="1.571 0.0 1.571" xyz="0.2 0.0 0.3"/>
+			<specs resolution_x="800" resolution_y="600" horizontal_fov="60.0"/>
+			<ros_publisher topic="/bluerov2/cam"/>
+		</sensor>
+
+		<world_transform rpy="0.0 0.0 3.14" xyz="0 0 0.2"/>
+
+		
+		<ros_subscriber thrusters="/bluerov/controller/thruster_setpoints_sim" servos="/bluerov2/controller/sonar_servo_setpoints_sim"/>
+		<ros_publisher thrusters="/bluerov/controller/thruster_state" servos="/bluerov2/controller/sonar_servo_state"/>
+		<ros_base_link_transforms publish="true"/>
+	</robot>
+</scenario>

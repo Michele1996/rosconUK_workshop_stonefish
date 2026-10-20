@@ -1,0 +1,15 @@
+{
+  "size_pixels": 512,
+  "horizontal_span_m": 88.0,
+  "metres_per_pixel": 0.171875,
+  "max_height_m": 1.2,
+  "mean_normalized_height": 0.4976603640623649,
+  "terrain_z_origin_m": 10.0,
+  "texture_input": "uploaded sand.jpg (unaltered byte-for-byte)",
+  "height_source": "restored original featured synthetic multiscale heightmap, with level pads at the 3 survey sites",
+  "texture_sha256": "3d54f5b4ef7d0402c31a25a0f56dff73995f91332ec0a836074707fd907954a9",
+  "colour_texture_mapping": "Stonefish native heightmap UV tiling, uv_scale=0.12",
+  "actual_relief_span_m": 1.0329,
+  "reference_site_surface_depth_m": 9.4,
+  "rocks": 0
+}

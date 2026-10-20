@@ -1,0 +1,14 @@
+# Blender 5.2.2 LTS MTL File: 'concrete_cat_statue_4k.blend'
+# www.blender.org
+
+newmtl concrete_cat_statue
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd textures/concrete_cat_statue_diff_4k.jpg
+map_Ns textures/concrete_cat_statue_rough_4k.exr
+map_refl textures/concrete_cat_statue_metal_4k.exr
+map_Bump -bm 1.000000 textures/concrete_cat_statue_nor_gl_4k.exr

@@ -14,16 +14,7 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Float64MultiArray
 
-ALLOCATION = np.array([
-    [ 1,  1,  1,  0],
-    [ 1, -1, -1,  0],
-    [-1,  1, -1,  0],
-    [-1, -1,  1,  0],
-    [ 0,  0,  0,  1],
-    [ 0,  0,  0, -1],
-    [ 0,  0,  0, -1],
-    [ 0,  0,  0,  1],
-], dtype=float)
+from .bluerov_waypoint_math import ALLOCATION
 
 class BlueROVThrusterAdapter(Node):
     def __init__(self):

@@ -1,0 +1,411 @@
+<?xml version='1.0' encoding='utf-8'?>
+<scenario>
+  <environment>
+    <ned latitude="41.7777" longitude="3.0333" />
+    <ocean><water density="1031.0" jerlov="0.10" temperature="15.0" /><waves height="0.0" /><particles enabled="false" /></ocean>
+    <atmosphere>
+      <sun azimuth="30.0" elevation="70.0" />
+    </atmosphere>
+  </environment>
+  <materials>
+    <material name="Rock" density="2650.0" restitution="0.12" />
+    <material name="Steel" density="7850.0" restitution="0.10" /><material name="Hull" density="1000.0" restitution="0.1" />
+    <material name="Neutral" density="1000.0" restitution="0.1" />
+    <material name="Target" density="2400.0" restitution="0.15" />
+    <friction_table>
+      <friction material1="Rock" material2="Hull" static="0.7" dynamic="0.45" />
+    </friction_table>
+  </materials>
+  <looks>
+    <look name="ROVBlue" rgb="0.08 0.42 0.85" roughness="0.35" />
+    <look name="blue" rgb="0.0 0.5 1.0" roughness="0.3" />
+    <look name="Seabed" roughness="0.93" texture="photogrammetry/textures/seabed.jpg" gray="1.0" />
+    <look name="Pedestal" rgb="0.35 0.33 0.27" roughness="0.85" />
+    <look name="DarkFastener" rgb="0.15 0.12 0.10" roughness="0.9" />
+    <look name="Photo_cat" gray="1.0" roughness="0.85" texture="photogrammetry/textures/cat.jpg" />
+    <look name="Photo_bust" gray="1.0" roughness="0.85" texture="photogrammetry/textures/bust.jpg" />
+    <look name="Photo_outside" gray="1.0" roughness="0.85" texture="photogrammetry/textures/outside.jpg" />
+    <look name="Photo_interior" gray="1.0" roughness="0.85" texture="photogrammetry/textures/interior.jpg" />
+    <look name="Photo_sol" gray="1.0" roughness="0.85" texture="photogrammetry/textures/sol.jpg" />
+    <look name="Photo_sol_obj" gray="1.0" roughness="0.85" texture="photogrammetry/textures/sol_obj.jpg" />
+    <look name="Photo_sol_obj1" gray="1.0" roughness="0.85" texture="photogrammetry/textures/sol_obj1.jpg" />
+    <look name="Photo_pont_arriere" gray="1.0" roughness="0.85" texture="photogrammetry/textures/pont_arriere.jpg" />
+    <look name="Photo_pont_avant" gray="1.0" roughness="0.85" texture="photogrammetry/textures/pont_avant.jpg" />
+    <look name="Photo_pont_milieu" gray="1.0" roughness="0.85" texture="photogrammetry/textures/pont_milieu.jpg" />
+    <look name="Photo_poutre" gray="1.0" roughness="0.85" texture="photogrammetry/textures/poutre.jpg" />
+    <look name="Photo_crane" gray="1.0" roughness="0.85" texture="photogrammetry/textures/crane.jpg" />
+    <look name="br2" gray="1.0" roughness="0.45" metalness="0.18" texture="bluerov2_unphy/br2.png" />
+    <look name="black" rgb="0.04 0.07 0.10" roughness="0.65" />
+    <look name="None" rgb="0.18 0.20 0.21" roughness="0.9" />
+      <look name="ObstacleStone" rgb="0.27 0.30 0.27" roughness="0.92" />
+    <look name="ObstacleSilt" rgb="0.38 0.34 0.27" roughness="0.94" />
+  </looks>
+  <include file="$(find roscon_stonefish_workshop)/data/robots/bluerov2_photogrammetry.scn" />
+  
+  <static name="Seabed" type="terrain">
+    <height_map filename="photogrammetry/terrain_height.png" />
+    <dimensions scalex="0.171875" scaley="0.171875" height="1.2" />
+    <material name="Rock" />
+    <look name="Seabed" uv_scale="1.0" />
+    <world_transform xyz="0 0 10.0" rpy="0 0 0" />
+  </static>
+  <static name="CatPedestal" type="box">
+    <dimensions xyz="1.5 1.5 0.5" />
+    <material name="Rock" />
+    <look name="Pedestal" />
+    <world_transform xyz="-10 -6 9.20" rpy="0 0 0" />
+  </static>
+  <static name="BustPedestal" type="box">
+    <dimensions xyz="1.4 1.4 0.5" />
+    <material name="Rock" />
+    <look name="Pedestal" />
+    <world_transform xyz="-10 5 9.20" rpy="0 0 0" />
+  </static>
+  <static name="cat_target_0" type="model">
+    <physical>
+      <mesh filename="photogrammetry/cat_collision.obj" scale="1" convex="true" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/cat_textured.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="Photo_cat" />
+    <world_transform xyz="-10 -6 8.95" rpy="0 0 0" />
+  </static>
+  <static name="bust_target_0" type="model">
+    <physical>
+      <mesh filename="photogrammetry/bust_collision.obj" scale="1" convex="true" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/bust_textured.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="Photo_bust" />
+    <world_transform xyz="-10 5 8.95" rpy="0 0 0" />
+  </static>
+  <static name="wr_target_0" type="model">
+    <physical>
+      <mesh filename="photogrammetry/wr_collision.obj" scale="1" convex="true" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/wr_00.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="Photo_outside" />
+    <world_transform xyz="19 6 9.36" rpy="0 0 0" />
+  </static>
+  <animated name="Wreck_01" type="model" collisions="false">
+    <physical>
+      <mesh filename="photogrammetry/wr_collision.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/wr_01.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="DarkFastener" />
+    <trajectory type="manual">
+      <keypoint time="0" xyz="19 6 9.36" rpy="0 0 0" />
+    </trajectory>
+  </animated>
+  <animated name="Wreck_02" type="model" collisions="false">
+    <physical>
+      <mesh filename="photogrammetry/wr_collision.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/wr_02.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="Photo_outside" />
+    <trajectory type="manual">
+      <keypoint time="0" xyz="19 6 9.36" rpy="0 0 0" />
+    </trajectory>
+  </animated>
+  <animated name="Wreck_03" type="model" collisions="false">
+    <physical>
+      <mesh filename="photogrammetry/wr_collision.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/wr_03.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="Photo_outside" />
+    <trajectory type="manual">
+      <keypoint time="0" xyz="19 6 9.36" rpy="0 0 0" />
+    </trajectory>
+  </animated>
+  <animated name="Wreck_04" type="model" collisions="false">
+    <physical>
+      <mesh filename="photogrammetry/wr_collision.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/wr_04.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="Photo_poutre" />
+    <trajectory type="manual">
+      <keypoint time="0" xyz="19 6 9.36" rpy="0 0 0" />
+    </trajectory>
+  </animated>
+  <animated name="Wreck_05" type="model" collisions="false">
+    <physical>
+      <mesh filename="photogrammetry/wr_collision.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/wr_05.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="Photo_pont_milieu" />
+    <trajectory type="manual">
+      <keypoint time="0" xyz="19 6 9.36" rpy="0 0 0" />
+    </trajectory>
+  </animated>
+  <animated name="Wreck_06" type="model" collisions="false">
+    <physical>
+      <mesh filename="photogrammetry/wr_collision.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/wr_06.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="Photo_crane" />
+    <trajectory type="manual">
+      <keypoint time="0" xyz="19 6 9.36" rpy="0 0 0" />
+    </trajectory>
+  </animated>
+  <animated name="Wreck_07" type="model" collisions="false">
+    <physical>
+      <mesh filename="photogrammetry/wr_collision.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/wr_07.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="Photo_pont_arriere" />
+    <trajectory type="manual">
+      <keypoint time="0" xyz="19 6 9.36" rpy="0 0 0" />
+    </trajectory>
+  </animated>
+  <animated name="Wreck_08" type="model" collisions="false">
+    <physical>
+      <mesh filename="photogrammetry/wr_collision.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/wr_08.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="Photo_interior" />
+    <trajectory type="manual">
+      <keypoint time="0" xyz="19 6 9.36" rpy="0 0 0" />
+    </trajectory>
+  </animated>
+  <animated name="Wreck_09" type="model" collisions="false">
+    <physical>
+      <mesh filename="photogrammetry/wr_collision.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/wr_09.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="DarkFastener" />
+    <trajectory type="manual">
+      <keypoint time="0" xyz="19 6 9.36" rpy="0 0 0" />
+    </trajectory>
+  </animated>
+  <animated name="Wreck_10" type="model" collisions="false">
+    <physical>
+      <mesh filename="photogrammetry/wr_collision.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/wr_10.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="Photo_outside" />
+    <trajectory type="manual">
+      <keypoint time="0" xyz="19 6 9.36" rpy="0 0 0" />
+    </trajectory>
+  </animated>
+  <animated name="Wreck_11" type="model" collisions="false">
+    <physical>
+      <mesh filename="photogrammetry/wr_collision.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/wr_11.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="Photo_outside" />
+    <trajectory type="manual">
+      <keypoint time="0" xyz="19 6 9.36" rpy="0 0 0" />
+    </trajectory>
+  </animated>
+  <animated name="Wreck_12" type="model" collisions="false">
+    <physical>
+      <mesh filename="photogrammetry/wr_collision.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/wr_12.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="Photo_sol_obj1" />
+    <trajectory type="manual">
+      <keypoint time="0" xyz="19 6 9.36" rpy="0 0 0" />
+    </trajectory>
+  </animated>
+  <animated name="Wreck_13" type="model" collisions="false">
+    <physical>
+      <mesh filename="photogrammetry/wr_collision.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/wr_13.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="Photo_sol" />
+    <trajectory type="manual">
+      <keypoint time="0" xyz="19 6 9.36" rpy="0 0 0" />
+    </trajectory>
+  </animated>
+  <animated name="Wreck_14" type="model" collisions="false">
+    <physical>
+      <mesh filename="photogrammetry/wr_collision.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </physical>
+    <visual>
+      <mesh filename="photogrammetry/wr_14.obj" scale="1" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </visual>
+    <material name="Target" />
+    <look name="Photo_sol_obj" />
+    <trajectory type="manual">
+      <keypoint time="0" xyz="19 6 9.36" rpy="0 0 0" />
+    </trajectory>
+  </animated>
+  <light name="CatSurveyFill">
+    <specs radius="0.12" illuminance="6500.0" />
+    <color temperature="5700.0" />
+    <world_transform xyz="-10 -6 5.9" rpy="0 0 0" />
+  </light>
+  <light name="BustSurveyFill">
+    <specs radius="0.12" illuminance="6500.0" />
+    <color temperature="5700.0" />
+    <world_transform xyz="-10 5 5.9" rpy="0 0 0" />
+  </light>
+  <light name="WreckSurveyFill">
+    <specs radius="0.12" illuminance="6500.0" />
+    <color temperature="5700.0" />
+    <world_transform xyz="19 6 5.6" rpy="0 0 0" />
+  </light>
+  <light name="NorthSeabedFill">
+    <specs radius="0.14" illuminance="2200.0" />
+    <color temperature="5600.0" />
+    <world_transform xyz="-20 0 5.8" rpy="0 0 0" />
+  </light>
+  <light name="CentralSeabedFill">
+    <specs radius="0.14" illuminance="2200.0" />
+    <color temperature="5600.0" />
+    <world_transform xyz="2 -2 5.8" rpy="0 0 0" />
+  </light>
+  <light name="EastSeabedFill">
+    <specs radius="0.14" illuminance="2200.0" />
+    <color temperature="5600.0" />
+    <world_transform xyz="27 -7 5.8" rpy="0 0 0" />
+  </light>
+
+  <!-- Autonomous inspection challenge: solid occluding stone blocks; reference planner uses conservative XY keep-outs. -->
+  <static name="CatApproachBlock" type="box">
+    <dimensions xyz="1.55 1.55 4.10" />
+    <material name="Rock" />
+    <look name="ObstacleStone" />
+    <world_transform xyz="-14.00 -6.00 7.95" rpy="0 0 0" />
+  </static>
+  <static name="CatOccluder" type="box">
+    <dimensions xyz="1.65 1.65 4.10" />
+    <material name="Rock" />
+    <look name="ObstacleStone" />
+    <world_transform xyz="-12.50 -8.60 7.95" rpy="0 0 0" />
+  </static>
+  <static name="CatPillar" type="box">
+    <dimensions xyz="1.20 1.20 4.10" />
+    <material name="Rock" />
+    <look name="ObstacleStone" />
+    <world_transform xyz="-7.60 -9.10 7.95" rpy="0 0 0" />
+  </static>
+  <static name="BustApproachBlock" type="box">
+    <dimensions xyz="1.80 1.80 4.10" />
+    <material name="Rock" />
+    <look name="ObstacleStone" />
+    <world_transform xyz="-12.80 1.00 7.95" rpy="0 0 0" />
+  </static>
+  <static name="BustOccluder" type="box">
+    <dimensions xyz="1.40 1.40 4.10" />
+    <material name="Rock" />
+    <look name="ObstacleStone" />
+    <world_transform xyz="-12.80 7.70 7.95" rpy="0 0 0" />
+  </static>
+  <static name="BustPillar" type="box">
+    <dimensions xyz="1.20 1.20 4.10" />
+    <material name="Rock" />
+    <look name="ObstacleStone" />
+    <world_transform xyz="-7.00 7.50 7.95" rpy="0 0 0" />
+  </static>
+  <static name="EastTransitBlock" type="box">
+    <dimensions xyz="1.85 1.85 4.10" />
+    <material name="Rock" />
+    <look name="ObstacleStone" />
+    <world_transform xyz="3.00 2.00 7.95" rpy="0 0 0" />
+  </static>
+  <static name="WreckWestScreen" type="box">
+    <dimensions xyz="1.55 1.55 4.10" />
+    <material name="Rock" />
+    <look name="ObstacleStone" />
+    <world_transform xyz="13.00 2.00 7.95" rpy="0 0 0" />
+  </static>
+  <static name="WreckWestPillar" type="box">
+    <dimensions xyz="1.55 1.55 4.10" />
+    <material name="Rock" />
+    <look name="ObstacleStone" />
+    <world_transform xyz="13.00 12.00 7.95" rpy="0 0 0" />
+  </static>
+  <static name="WreckEastPillar" type="box">
+    <dimensions xyz="1.55 1.55 4.10" />
+    <material name="Rock" />
+    <look name="ObstacleStone" />
+    <world_transform xyz="24.00 -2.00 7.95" rpy="0 0 0" />
+  </static>
+  <static name="WreckEastScreen" type="box">
+    <dimensions xyz="1.55 1.55 4.10" />
+    <material name="Rock" />
+    <look name="ObstacleStone" />
+    <world_transform xyz="25.00 12.00 7.95" rpy="0 0 0" />
+  </static>
+</scenario>
