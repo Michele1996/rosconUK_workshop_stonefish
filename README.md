@@ -254,12 +254,15 @@ For attempts 2 and 3, stop the controller and simulator, restart at the initial 
 
 ### 4.4 Timing, penalties and ranking
 
-A finished run's result is:
+A finished run's result is its **elapsed race time plus penalties**:
 
-$$
-T_{\mathrm{final}} = T_{\mathrm{START\to FINISH}}
-  + 8 N_{\mathrm{offtrack}} + 2T_{\mathrm{outside}}.
-$$
+```text
+Final time (s) = START-to-FINISH time (s)
+               + 8 × number of off-track excursions
+               + 2 × total seconds spent outside the corridor
+```
+
+**All penalty terms are added**, so a longer time or more off-track violations can never improve the score. This plain-text formula is intentional: it renders consistently on GitHub and in Markdown viewers that do not support LaTeX.
 
 - **`T_START→FINISH`**: time between the correct START and FINISH crossings, in **simulation seconds** (not wall-clock seconds).
 - **`N_offtrack`**: number of separate departures from the permitted course corridor after timing begins. Each adds **8 seconds**.
