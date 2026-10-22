@@ -3,9 +3,11 @@
 
 Order in blueboat.scn is [Thruster_R, Thruster_L]. All setpoints are [-1,1].
 Zero output after a command timeout avoids uncontrolled propulsion after a node dies.
-Convention: Stonefish world NED, positive yaw is towards starboard (+y).
-Motor definitions use the known-working BlueROV inverted_setpoint=true setting.
-The bridge negates mixer outputs to preserve the prior non-inverted sign convention.
+A positive Twist.linear.x MUST drive the boat forward. On the workshop's
+Stonefish BlueBoat model this requires POSITIVE raw motor setpoints; the
+previous bridge made the boat reverse by negating positive surge commands.
+The raw motor polarity for yaw is independent, so the existing yaw response
+is deliberately left unchanged. Use surge_sign to calibrate another model.
 """
 import math
 
@@ -24,6 +26,19 @@ def mix_thrusters(surge, yaw, yaw_sign=1.0):
     return [right/norm, left/norm]
 
 
+def map_twist_to_setpoints(surge, yaw, surge_sign=-1.0, yaw_sign=1.0):
+    """Translate a Twist to native [right, left] Stonefish motor commands.
+
+    With surge_sign=-1 (workshop default):
+      Twist.linear.x=+0.15, Twist.angular.z=0 -> [+0.15, +0.15]
+    Turn polarity is kept identical to the preceding workshop release.
+    """
+    if float(surge_sign) not in (-1.0, 1.0):
+        raise ValueError('surge_sign must be +1.0 or -1.0')
+    return [-x for x in mix_thrusters(float(surge) * float(surge_sign),
+                                      yaw, yaw_sign)]
+
+
 class BlueBoatThrusterAdapter(Node):
     def __init__(self):
         super().__init__('blueboat_thruster_adapter')
@@ -31,6 +46,7 @@ class BlueBoatThrusterAdapter(Node):
         self.declare_parameter('thruster_topic', '/blueboat/controller/thruster_setpoints_sim')
         self.declare_parameter('timeout_s', 2.0)
         self.declare_parameter('yaw_sign', 1.0)
+        self.declare_parameter('surge_sign', -1.0)
         self.pub = self.create_publisher(Float64MultiArray,
             self.get_parameter('thruster_topic').value, 10)
         self.create_subscription(Twist, self.get_parameter('cmd_topic').value,
@@ -38,7 +54,11 @@ class BlueBoatThrusterAdapter(Node):
         self.command = (0.0, 0.0)
         self.last_cmd = None
         self.create_timer(0.05, self.publish)
-        self.get_logger().info('BlueBoat thruster bridge active [right, left].')
+        self.get_logger().info(
+            'BlueBoat thruster bridge active [right, left]; '
+            f'surge_sign={self.get_parameter("surge_sign").value}, '
+            f'yaw_sign={self.get_parameter("yaw_sign").value}. '
+            'Twist.linear.x > 0 commands forward on this Stonefish model.')
 
     def receive(self, msg):
         if not (math.isfinite(msg.linear.x) and math.isfinite(msg.angular.z)):
@@ -53,7 +73,10 @@ class BlueBoatThrusterAdapter(Node):
                      now-self.last_cmd > self.get_parameter('timeout_s').value)
         surge, yaw = (0.0, 0.0) if timed_out else self.command
         out = Float64MultiArray()
-        out.data = [-x for x in mix_thrusters(surge,yaw,self.get_parameter('yaw_sign').value)]
+        out.data = map_twist_to_setpoints(
+            surge, yaw,
+            surge_sign=self.get_parameter('surge_sign').value,
+            yaw_sign=self.get_parameter('yaw_sign').value)
         self.pub.publish(out)
 
 

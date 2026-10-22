@@ -28,7 +28,7 @@ def generate_launch_description():
         DeclareLaunchArgument('scenario',default_value='blueboat_race.scn'),
         DeclareLaunchArgument('team',default_value='Team 1'),
         DeclareLaunchArgument('start_pid',default_value='false',
-                              description='Start unfinished participant PID starter (surge=0).'),
+                              description='Start sensor-only participant heading PID (surge=0).'),
         DeclareLaunchArgument('race_monitor',default_value='true'),
         DeclareLaunchArgument('results_dir',default_value='~/.ros/roscon_blueboat_grand_prix'),
         DeclareLaunchArgument('thruster_adapter',default_value='true'),

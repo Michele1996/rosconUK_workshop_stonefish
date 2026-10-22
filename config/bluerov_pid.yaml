@@ -1,6 +1,6 @@
 # Fast-but-braked BlueROV2 waypoint PID baseline: TURN -> MOVE -> SETTLE.
 # Tuned initial estimates for simulation; physical motion and sign must be tested.
-# Increase only after checking yaw/heave signs; values are normalised motor commands.
+# Simulation-only: increased depth authority; commands remain normalised.
 # NED world depth z increases downward. Signs are calibrated against the
 # Logitech 8x4 allocation in the user's Stonefish configuration. If commanded
 # dive moves upward, switch heave_sign. If yaw moves away, switch yaw_sign.
@@ -15,13 +15,17 @@ photogrammetry_waypoint_pid:
     kp_forward: 0.28
     kd_forward: 0.13
     max_forward: 0.58
-    kp_yaw: 0.3
-    kd_yaw: 0.14
+    kp_yaw: 0.38
+    kd_yaw: 0.22
     max_yaw: 0.34
-    kp_depth: 0.16
-    ki_depth: 0.008
-    kd_depth: 0.2
-    max_heave: 0.2
+    kp_depth: 1.20
+    ki_depth: 0.10
+    kd_depth: 0.30
+    max_heave: 0.50
     depth_deadband: 0.06
     yaw_sign: -1.0
     heave_sign: -1.0
+
+# During pure turns, the PID detects sustained *wrong-direction* yaw from
+# odometry. It reverses its effective yaw_sign once and inhibits further yaw
+# if both polarities diverge. A real Stonefish run is still required.

@@ -20,7 +20,7 @@ from nav_msgs.msg import Odometry
 class Capture(Node):
     def __init__(self):
         super().__init__('photogrammetry_capture')
-        self.declare_parameter('image_topic','/bluerov2/camera/image_raw')
+        self.declare_parameter('image_topic','/bluerov2/camera/image_raw/image_color')
         self.declare_parameter('odom_topic','/bluerov2/odometry')
         self.declare_parameter('output_dir',str(Path.home()/'roscon_photogrammetry'/'survey'))
         self.declare_parameter('min_interval_s',1.0)

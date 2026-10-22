@@ -20,7 +20,7 @@ class LocalWorkflow(unittest.TestCase):
         self.root=Path(self.temp.name)
         self.course_path=ROOT/'config/blueboat_race.json'
         self.sha=sha256_file(self.course_path)
-        self.course=load_course(self.course_path)
+        self.course=load_course(self.course_path, purpose='offline_test')
 
     def tearDown(self): self.temp.cleanup()
 

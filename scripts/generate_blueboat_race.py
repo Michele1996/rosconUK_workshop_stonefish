@@ -186,7 +186,7 @@ def update_robot_start(course):
 
 
 def main():
-    course = load_course(CONFIG)
+    course = load_course(CONFIG, purpose='scene_generation')
     update_robot_start(course)
     TEXTURES.mkdir(parents=True, exist_ok=True)
     d = length(course)

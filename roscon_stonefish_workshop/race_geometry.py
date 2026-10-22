@@ -1,4 +1,4 @@
-"""Shared geometry for Stonefish course generation, scoring, and PID exercise.
+"""Organiser geometry for Stonefish course generation and local scoring.
 
 Pure Python: these functions can be unit-tested without a ROS 2 installation.
 The source of truth for the course is config/blueboat_race.json.
@@ -7,8 +7,17 @@ import json
 import math
 from pathlib import Path
 
+from .fair_play import violation
 
-def load_course(path):
+
+def load_course(path, *, purpose=None):
+    """Load private course data for official scoring, scene generation or tests.
+
+    Participant calls to this SUPPLIED API explicitly fail with the fair-play
+    notice. Purpose tags are cooperative, NOT an access-control boundary.
+    """
+    if purpose not in ('judge', 'scene_generation', 'offline_test'):
+        violation('Loading organiser course geometry for navigation is prohibited', path)
     with open(Path(path).expanduser(), encoding='utf-8') as stream:
         course = json.load(stream)
     if len(course['centerline_xy_m']) < 2:

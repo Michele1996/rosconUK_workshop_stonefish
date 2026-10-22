@@ -2,10 +2,10 @@
 """Introductory direct two-thruster example (adapter MUST be disabled).
 
 Run with: ros2 run roscon_stonefish_workshop blueboat_thruster_intro --demo
-or:       ros2 run roscon_stonefish_workshop blueboat_thruster_intro --right -0.15 --left -0.15 --duration 3
+or:       ros2 run roscon_stonefish_workshop blueboat_thruster_intro --right +0.15 --left +0.15 --duration 3
 
 BlueBoat SCN thruster order: [right, left]. Commands normalized in [-1, +1].
-Signs depend on final physical orientation; test gently and visually confirm.
+On the workshop model, positive motor setpoints move the boat forward. Confirm visually.
 """
 import argparse
 import math
@@ -39,8 +39,8 @@ class DirectMotors(Node):
 
 def main():
     parser = argparse.ArgumentParser(description='BlueBoat thruster familiarisation (direct motor commands)')
-    parser.add_argument('--right', type=float, default=-0.15)
-    parser.add_argument('--left', type=float, default=-0.15)
+    parser.add_argument('--right', type=float, default=0.15)
+    parser.add_argument('--left', type=float, default=0.15)
     parser.add_argument('--duration', type=float, default=3.0)
     parser.add_argument('--demo', action='store_true', help='Gentle straight / differential / stop sequence')
     parser.add_argument('--topic', default='/blueboat/controller/thruster_setpoints_sim')
@@ -54,9 +54,9 @@ def main():
     try:
         if args.demo:
             motor.get_logger().info('Gentle test: straight -> stop -> turn -> stop')
-            motor.move(-0.15, -0.15, 2.5)
+            motor.move(0.15, 0.15, 2.5)
             motor.move(0., 0., 1.)
-            motor.move(-0.1, -0.2, 2.)
+            motor.move(0.1, 0.2, 2.)
         else:
             motor.get_logger().info(f'Direct setpoints [right,left]=[{args.right:.2f},{args.left:.2f}] for {args.duration:.1f}s')
             motor.move(args.right, args.left, args.duration)

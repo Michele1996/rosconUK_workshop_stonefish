@@ -31,7 +31,7 @@ class RaceMonitor(Node):
         course_file = self.get_parameter('course_file').value
         if not course_file:
             raise ValueError('course_file launch parameter is required')
-        course = load_course(course_file)
+        course = load_course(course_file, purpose='judge')
         self.engine = RaceEngine(course)
         self.engine.disarm()  # ALWAYS practice until a team explicitly arms.
         self.team = str(self.get_parameter('team').value)
@@ -114,7 +114,13 @@ class RaceMonitor(Node):
                 self.store.finalize('FINISHED', status)
             elif status['state'] == 'timed_out':
                 self.store.finalize('DNF_TIMEOUT', status)
-        status.update({
+        # Keep full geometric diagnostics INSIDE the judge and saved records.
+        # Never publish the signed/cross-track geometric oracle over the public
+        # status topic; participants must estimate route geometry from sensors.
+        public_status = {key: value for key, value in status.items()
+                         if key not in ('distance_from_center_m',
+                                        'nearest_course_s_m', 'outside')}
+        public_status.update({
             'team': self.team,
             'attempts_used': self.store.consumed,
             'attempts_remaining': self.store.remaining,
@@ -122,7 +128,7 @@ class RaceMonitor(Node):
             'local_results_directory': str(self.store.root),
         })
         message = String()
-        message.data = json.dumps(status, separators=(',', ':'))
+        message.data = json.dumps(public_status, separators=(',', ':'))
         self.status_pub.publish(message)
         if status['events'] or stamp - self.last_log_sim >= 5:
             self.get_logger().info(

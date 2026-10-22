@@ -164,7 +164,7 @@
     </sensor>
     <sensor name="bow_camera" type="camera" rate="10.0">
       <link name="Vehicle" />
-      <origin xyz="0.5 0.0 -0.45" rpy="0.0 0.0 0.0" />
+      <origin xyz="0.5 0.0 -0.45" rpy="1.57 0.0 1.57" />
       <specs resolution_x="640" resolution_y="480" horizontal_fov="90.0" />
       <ros_publisher topic="/blueboat/camera/image_raw" />
     </sensor>

@@ -42,13 +42,13 @@ class WaypointGains:
     kp_forward: float = 0.28
     kd_forward: float = 0.13
     max_forward: float = 0.58
-    kp_yaw: float = 0.3
-    kd_yaw: float = 0.14
-    max_yaw: float = 0.34
-    kp_depth: float = 0.16
-    ki_depth: float = 0.008
-    kd_depth: float = 0.2
-    max_heave: float = 0.2
+    kp_yaw: float = 0.30
+    kd_yaw: float = 0.22
+    max_yaw: float = 0.28
+    kp_depth: float = 1.20
+    ki_depth: float = 0.10
+    kd_depth: float = 0.30
+    max_heave: float = 0.50
     depth_deadband: float = 0.06
     # Original Logitech joystick directions are not guaranteed to be NED signs.
     # These are startup estimates; confirm via --axis yaw / heave in Stonefish.
@@ -84,7 +84,10 @@ def waypoint_efforts(x, y, z, yaw, gx, gy, gz, goal_yaw,
         surge = clamp(g.kp_forward * dxy - g.kd_forward * forward_speed,
                       0.0, approach_limit) * alignment
 
-    yaw_cmd = g.yaw_sign * clamp(g.kp_yaw * yaw_error - g.kd_yaw * yaw_rate,
+    # Angular deadband and rate damping avoid chattering at the final heading.
+    # Keep rate damping active even inside the deadband to brake residual spin.
+    yaw_p = 0.0 if abs(yaw_error) < math.radians(2.0) else g.kp_yaw * yaw_error
+    yaw_cmd = g.yaw_sign * clamp(yaw_p - g.kd_yaw * yaw_rate,
                                   -g.max_yaw, g.max_yaw)
 
     # Do not suddenly dive/climb while rotating on the spot to face waypoint 0.
@@ -101,3 +104,54 @@ def waypoint_efforts(x, y, z, yaw, gx, gy, gz, goal_yaw,
     return (float(surge), 0.0, float(yaw_cmd), float(heave_cmd)), mode, dxy, ez, yaw_error
 
 
+
+
+class YawDivergenceGuard:
+    """Simulation-only yaw polarity check from closed-loop odometry.
+
+    During *pure rotation* (TURN or SETTLE), if a meaningful correction
+    consistently increases heading error, reverse the assumed yaw polarity
+    once. If the reversed polarity also diverges, inhibit yaw and require
+    inspection of the motor mapping/odometry. Never learn during translation,
+    yaw braking, small corrections, or the turn's immediate motor transient.
+    """
+
+    def __init__(self, sign=-1.0, reverse_after_s=0.55, lock_after_s=1.5):
+        if sign not in (-1.0, 1.0):
+            raise ValueError('yaw_sign must be -1 or +1')
+        self.sign = float(sign)
+        self.reversed_once = False
+        self.locked = False
+        self.diverging_since = None
+        self.ignore_until = 0.0
+        self.reverse_after_s = float(reverse_after_s)
+        self.lock_after_s = float(lock_after_s)
+
+    def update(self, now, mode, yaw_error, yaw_rate, motor_yaw):
+        """Return 'REVERSED', 'LOCKED', or None; new sign in ``sign``."""
+        if self.locked:
+            return None
+        # motor_yaw is in actuator convention; recover intended NED command
+        # using the currently assumed polarity.
+        correcting = yaw_error * motor_yaw * self.sign > 0.0
+        if (now < self.ignore_until or mode not in ('TURN', 'SETTLE') or
+                abs(yaw_error) < math.radians(10) or
+                abs(yaw_rate) < 0.035 or abs(motor_yaw) < 0.08 or
+                not correcting or yaw_error * yaw_rate >= -0.003):
+            self.diverging_since = None
+            return None
+        if self.diverging_since is None:
+            self.diverging_since = now
+            return None
+        limit = self.lock_after_s if self.reversed_once else self.reverse_after_s
+        if now - self.diverging_since < limit:
+            return None
+        self.diverging_since = None
+        if not self.reversed_once:
+            self.sign *= -1.0
+            self.reversed_once = True
+            # Allow propeller dynamics and vehicle inertia to settle.
+            self.ignore_until = now + 1.0
+            return 'REVERSED'
+        self.locked = True
+        return 'LOCKED'

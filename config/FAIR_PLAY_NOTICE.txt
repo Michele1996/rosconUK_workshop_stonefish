@@ -1,0 +1,14 @@
+ROSCon UK 2026 — BlueBoat Grand Prix FAIR PLAY NOTICE
+
+FAIR PLAY VIOLATION: participant navigation must not read race-course JSON,
+precomputed waypoint/trajectory/route files (including renamed CSV/JSON/YAML),
+extract precomputed locations from generated scene files, or use judge geometry.
+
+Permitted: live onboard RGB camera, ArUco observations, IMU, odometry, GPS.
+The local race judge MUST retain access to config/blueboat_race.json and
+continues to score unlimited practice and up to three official attempts.
+
+The supplied controller entrypoints print FAIR PLAY VIOLATION and stop when
+supplied with restricted file parameters. A standalone JSON file cannot run
+code when read, and participants owning a computer can modify or bypass those
+checks. Event organisers should review source/results for competitive fairness.

@@ -16,6 +16,7 @@ change yaw_sign/heave_sign in config if the direct-thruster test shows reverse.
 """
 import math
 import time
+from dataclasses import replace
 
 import rclpy
 from geometry_msgs.msg import PoseStamped
@@ -27,7 +28,7 @@ from std_msgs.msg import Float64MultiArray, String
 
 from .bluerov_waypoint_math import (
     WaypointGains, waypoint_efforts, allocate, clamp, wrap_pi,
-    yaw_from_quat, body_forward_velocity)
+    yaw_from_quat, body_forward_velocity, YawDivergenceGuard)
 
 class BlueROVWaypointPID(Node):
     def __init__(self):
@@ -43,9 +44,9 @@ class BlueROVWaypointPID(Node):
             'xy_tolerance':0.65,
             'turn_threshold_rad':0.52,
             'kp_forward':0.28, 'kd_forward':0.13, 'max_forward':0.58,
-            'kp_yaw':0.3, 'kd_yaw':0.14, 'max_yaw':0.34,
-            'kp_depth':0.16, 'ki_depth':0.008, 'kd_depth':0.2,
-            'max_heave':0.2, 'depth_deadband':0.06,
+            'kp_yaw':0.30, 'kd_yaw':0.22, 'max_yaw':0.28,
+            'kp_depth':1.20, 'ki_depth':0.10, 'kd_depth':0.30,
+            'max_heave':0.50, 'depth_deadband':0.06,
             'yaw_sign':-1.0, 'heave_sign':-1.0,
         }
         for key, val in defaults.items():
@@ -61,6 +62,7 @@ class BlueROVWaypointPID(Node):
         self.rate_yaw = 0.0
         self.depth_integral = 0.0
         self.mode = 'WAIT'
+        self.yaw_guard = YawDivergenceGuard(float(self.p('yaw_sign')))
         self.turn_depth = None
         self.debug_last = 0.0
         self.pub = self.create_publisher(Float64MultiArray, self.p('thruster_topic'), 10)
@@ -68,9 +70,12 @@ class BlueROVWaypointPID(Node):
         self.create_subscription(PoseStamped, self.p('setpoint_topic'), self.on_setpoint, 10)
         self.create_subscription(Odometry, self.p('odom_topic'), self.on_odom, 10)
         self.create_timer(0.05, self.tick)
-        self.get_logger().info('Simple heading-first waypoint PID, 8x4 Logitech allocation, direct thrusters. '
-                               'Initial yaw_sign=%.0f, heave_sign=%.0f; verify direction in Stonefish.' %
-                               (self.p('yaw_sign'), self.p('heave_sign')))
+        self.get_logger().info(
+            'Waypoint PID: max_heave=%.2f, kp_depth=%.2f, '
+            'initial yaw_sign=%.0f, heave_sign=%.0f. '
+            'Yaw divergence guard enabled (simulation only).' %
+            (self.p('max_heave'), self.p('kp_depth'),
+             self.yaw_guard.sign, self.p('heave_sign')))
 
     def p(self, name):
         return self.get_parameter(name).value
@@ -84,7 +89,8 @@ class BlueROVWaypointPID(Node):
         p = msg.pose.position
         q = msg.pose.orientation
         value = (float(p.x),float(p.y),float(p.z),float(yaw_from_quat(q)))
-        if self.target is None or (math.dist(value[:3],self.target[:3]) > 0.15):
+        if self.target is None or (math.dist(value[:3],self.target[:3]) > 0.15 or
+                                   abs(wrap_pi(value[3]-self.target[3])) > 0.15):
             self.depth_integral = 0.0
             self.turn_depth = None
             self.mode = 'WAIT'
@@ -137,22 +143,48 @@ class BlueROVWaypointPID(Node):
             self.turn_depth = cur[2]
         if not should_turn:
             self.turn_depth = None
-        # Anti-windup: only integrate small depth errors when output is not saturated.
-        if not should_turn and abs(gz-cur[2]) < 1.5:
-            self.depth_integral = clamp(self.depth_integral + (gz-cur[2])*0.05,-0.45,0.45)
+        # Integrate a modest steady-state buoyancy correction in depth modes.
+        # Prevent windup at large errors, during TURN, or outside the deadband.
+        depth_error = gz-cur[2]
+        if not should_turn and 0.06 < abs(depth_error) < 0.6:
+            self.depth_integral = clamp(
+                self.depth_integral + depth_error*0.05, -1.5, 1.5)
         commands, mode, dxy, ez, eyaw = waypoint_efforts(
             *cur, gx,gy,gz,gyaw,
             forward_speed=self.speed_forward,down_speed=self.speed_down,
             yaw_rate=self.rate_yaw, depth_integral=self.depth_integral,
-            turn_depth=self.turn_depth,gains=self.gains())
+            turn_depth=self.turn_depth,
+            gains=replace(self.gains(), yaw_sign=self.yaw_guard.sign))
         self.mode = mode
+        event = self.yaw_guard.update(
+            now=now, mode=mode, yaw_error=eyaw, yaw_rate=self.rate_yaw,
+            motor_yaw=commands[2])
+        if event == 'REVERSED':
+            self.get_logger().warn(
+                'Yaw diverged during a pure turn: automatically inverted '
+                'effective yaw_sign to %.0f. Verify with a 30-degree yaw test.'
+                % self.yaw_guard.sign)
+            # Re-evaluate immediately, using the new yaw motor polarity.
+            commands, mode, dxy, ez, eyaw = waypoint_efforts(
+                *cur, gx,gy,gz,gyaw, forward_speed=self.speed_forward,
+                down_speed=self.speed_down, yaw_rate=self.rate_yaw,
+                depth_integral=self.depth_integral, turn_depth=self.turn_depth,
+                gains=replace(self.gains(), yaw_sign=self.yaw_guard.sign))
+        elif event == 'LOCKED':
+            self.get_logger().error(
+                'Yaw still diverges after polarity reversal. Inhibiting yaw '
+                'and forward commands. Stop and inspect thruster allocation, '
+                'motor publishers, and odometry before restarting.')
+        if self.yaw_guard.locked:
+            commands = (0.0, 0.0, 0.0, commands[3])
         motors = allocate(*commands,limit=float(self.p('max_thruster_setpoint')))
         self.send(motors)
         if now-self.debug_last >= 1.0:
             status = String()
             status.data = ('mode=%s d_xy=%.2fm depth_error=%.2fm yaw_error=%.1fdeg '
-                           'surge=%.3f yaw=%.3f heave=%.3f depth=%.2fm' %
-                           (mode,dxy,ez,math.degrees(eyaw),commands[0],commands[2],commands[3],cur[2]))
+                           'surge=%.3f yaw=%.3f yaw_rate=%.3f heave=%.3f depth=%.2fm yaw_sign=%.0f yaw_locked=%s' %
+                           (mode,dxy,ez,math.degrees(eyaw),commands[0],commands[2],self.rate_yaw,
+                            commands[3],cur[2],self.yaw_guard.sign,self.yaw_guard.locked))
             self.debug_pub.publish(status)
             self.debug_last = now
 

@@ -15,7 +15,7 @@ from roscon_stonefish_workshop.race_geometry import (crossing_fraction, gates,
 
 class RaceTests(unittest.TestCase):
     def setUp(self):
-        self.course = load_course(PROJECT/'config'/'blueboat_race.json')
+        self.course = load_course(PROJECT/'config'/'blueboat_race.json', purpose='offline_test')
 
     def test_course_and_waypoints(self):
         self.assertGreater(length(self.course), 80)

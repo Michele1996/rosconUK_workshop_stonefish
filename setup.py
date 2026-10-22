@@ -34,6 +34,7 @@ setup(
     license='Apache-2.0',
     entry_points={'console_scripts': [
         'blueboat_pid = roscon_stonefish_workshop.blueboat_pid:main',
+        'blueboat_camera_steering = roscon_stonefish_workshop.blueboat_camera_steering:main',
         'blueboat_thruster_intro = roscon_stonefish_workshop.blueboat_thruster_intro:main',
         'blueboat_thruster_demo = roscon_stonefish_workshop.blueboat_thruster_intro:main',
         'race_start = roscon_stonefish_workshop.race_start:main',
